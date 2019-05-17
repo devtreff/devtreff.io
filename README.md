@@ -1,5 +1,7 @@
 # devtreff.io
 
+## THIS PROJECT IS WORK IN PROGRESS. The new website is not live yet.
+
 This is the codebase for [devtreff.io](https://devtreff.io). It uses [Gridsome](https://gridsome.org), which is a Vue.js-based static site generator.
 
 ## Contributing
