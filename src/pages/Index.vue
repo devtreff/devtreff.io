@@ -1,29 +1,46 @@
 <template>
   <Layout>
-    
-    <!-- Learn how to use images here: https://gridsome.org/docs/images -->
-    <g-image alt="Example image" src="~/favicon.png" width="135" />
-    
-    <h1>Hello, world!</h1>
-   
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur excepturi labore tempore expedita, et iste tenetur suscipit explicabo! Dolores, aperiam non officia eos quod asperiores
-    </p>
+    <template #hero>
+      <div class="max-w-2xl">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold pb-3 lg:pb-8">Der DevTreff</h1>
+        <p class="leading-relaxed lg:leading-loose">
+          Das DevTreff findet in der Remise Amstetten, am Gelände des Quartier A statt.
+          Ein Ort an dem aktuell die Zukunft neu erfunden wird und deshalb ideal zu unseren
+          innovativen Vorträgen rund um Technologien und Digitalisierung passt.
+        </p>
+        <div class="mt-6 lg:mt-8 flex justify-between lg:flex-row flex-col">
+          <Button class="text-left flex-auto">
+            <div class="font-bold">Amstetten</div>
+            <div class="text-xs">16. Mai 2019</div>
+          </Button>
 
-    <p class="home-links">
-      <a href="https://gridsome.org/docs" target="_blank" rel="noopener">Gridsome Docs</a>
-      <a href="https://github.com/gridsome/gridsome" target="_blank" rel="noopener">GitHub</a>
-    </p>
+          <Button class="text-left flex-auto">
+            <div class="font-bold">Siegburg</div>
+            <div class="text-xs">25. Juni 2019</div>
+          </Button>
 
+          <Button class="text-left flex-auto">
+            <div class="font-bold">Archiv</div>
+            <div class="text-xs">7 DevTreffs in den letzten 2 Jahren</div>
+          </Button>
+        </div>
+      </div>
+    </template>
+    <template #main></template>
   </Layout>
 </template>
 
 <script>
+import Button from "~/components/Button.vue";
+
 export default {
+  components: {
+    Button
+  },
   metaInfo: {
-    title: 'Hello, world!'
+    title: "Hello, world!"
   }
-}
+};
 </script>
 
 <style>

@@ -7,6 +7,13 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
-    "gridsome": "^0.6.0"
+    "gridsome": "^0.6.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0"
+  },
+  "devDependencies": {
+    "gridsome-plugin-tailwindcss": "^2.2.6",
+    "stylelint-config-recommended": "^2.2.0",
+    "tailwindcss": "^1.0.1"
   }
 }
