@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <FullImageLayout image="/images/DevTreff3_35.jpg">
     <template #hero>
       <div class="max-w-2xl">
         <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold pb-3 lg:pb-8">Der DevTreff</h1>
@@ -26,16 +26,104 @@
         </div>
       </div>
     </template>
-    <template #main></template>
-  </Layout>
+    <template #main>
+      <Section title="Die Geschichte des DevTreff">
+        <template #content>
+          <p class="leading-relaxed">
+            Das DevTreff entstand aus der Idee, in der Region Mostviertel einen Entwicklerstammtisch
+            ins Leben zu rufen und somit eine Plattform zum Erfahrungsaustausch für Programmierer zu schaffen.
+          </p>
+          <p class="mt-8 leading-relaxed">
+            Neben den Vorträgen steht das lockere Netzwerken und Know-How Transfer im Vordergrund um Stück für Stück
+            eine Community und Technologie-Szene im Raum Amstetten zu schaffen – und das an einem Ort,
+            an dem gerade die Zukunft gestaltet wird – der Remise Amstetten.
+            Das DevTreff findet 1 mal pro Quartal statt. Die Teilnahme ist kostenlos.
+          </p>
+        </template>
+        <template #image>
+          <g-image src="~/images/DevTreff3_09.jpg" width="500"/>
+        </template>
+      </Section>
+      <Section title="Die Idee" :is-reversed="true">
+        <template #content>
+          <p class="leading-relaxed">
+            Das DevTreff entstand aus der Idee, in der Region Mostviertel einen Entwicklerstammtisch
+            ins Leben zu rufen und somit eine Plattform zum Erfahrungsaustausch für Programmierer zu schaffen.
+          </p>
+          <p class="mt-8 leading-relaxed">
+            Neben den Vorträgen steht das lockere Netzwerken und Know-How Transfer im Vordergrund um Stück für Stück
+            eine Community und Technologie-Szene im Raum Amstetten zu schaffen – und das an einem Ort,
+            an dem gerade die Zukunft gestaltet wird – der Remise Amstetten.
+            Das DevTreff findet 1 mal pro Quartal statt. Die Teilnahme ist kostenlos.
+          </p>
+        </template>
+        <template #image>
+          <g-image src="~/images/DevTreff3_07.jpg" width="500"/>
+        </template>
+      </Section>
+      <FullImage alt="Remise" src="/images/remise.webp" :hasVerticalGradient="true">
+        <template #content>
+          <div class="h-full flex flex-col items-center justify-end pb-16">
+            <div class="bg-orange-600 px-2 font-bold">DevTreff am 16. Mai 2019</div>
+            <h1 class="mt-4 text-4xl lg:text-5xl font-bold">Amstetten - Quartier A</h1>
+            <Button class="mt-10" variant="hollow">Weitere Informationen</Button>
+          </div>
+        </template>
+      </FullImage>
+      <section class="py-16 lg:py-32">
+        <div class="max-w-xl mx-auto relative" :style="{zIndex: 10}">
+          <Title class="text-lg md:text-xl lg:text-4xl">Vergangene DevTreff</Title>
+        </div>
+
+        <ImageSlider>
+          <g-image
+            class="relative"
+            src="~/images/DevTreff3_07.jpg"
+            :style="{minWidth: '300px'}"
+            width="300"
+          />
+          <g-image
+            class="relative ml-4"
+            src="~/images/DevTreff3_07.jpg"
+            :style="{minWidth: '300px'}"
+            width="300"
+          />
+          <g-image
+            class="relative ml-4"
+            src="~/images/DevTreff3_07.jpg"
+            :style="{minWidth: '300px'}"
+            width="300"
+          />
+          <g-image
+            class="relative ml-4"
+            src="~/images/DevTreff3_07.jpg"
+            :style="{minWidth: '300px'}"
+            width="300"
+          />
+          <g-image
+            class="relative ml-4"
+            src="~/images/DevTreff3_07.jpg"
+            :style="{minWidth: '300px'}"
+            width="300"
+          />
+        </ImageSlider>
+      </section>
+    </template>
+  </FullImageLayout>
 </template>
 
 <script>
 import Button from "~/components/Button.vue";
+import FullImage from "~/components/FullImage.vue";
+import Title from "~/components/Title.vue";
+import ImageSlider from "~/components/ImageSlider.vue";
 
 export default {
   components: {
-    Button
+    Button,
+    Title,
+    FullImage,
+    ImageSlider
   },
   metaInfo: {
     title: "Hello, world!"

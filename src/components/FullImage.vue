@@ -2,7 +2,8 @@
   <div class="flex justify-center min-h-screen relative h-full w-full overflow-hidden text-white">
     <div class="absolute full-bg-img" :style="imageStyle"></div>
     <div class="transparent-gradient" v-if="hasGradient"/>
-    <div class="container mx-auto absolute h-full px-4 pt-0 md:pt-4 lg:pt-6 xl:pt-8">
+    <div class="transparent-vertical-gradient" v-if="hasVerticalGradient"/>
+    <div class="content absolute h-full w-full">
       <slot name="content"/>
     </div>
   </div>
@@ -11,7 +12,7 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  props: ["hasGradient", "src"],
+  props: ["hasGradient", "hasVerticalGradient", "src"],
   computed: {
     imageStyle() {
       return {
@@ -22,7 +23,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .full-bg-img {
   height: 100%;
   width: 100%;
@@ -40,5 +41,20 @@ export default Vue.extend({
   bottom: 0;
   right: 0;
   left: 0;
+}
+
+.transparent-vertical-gradient {
+  position: absolute;
+  z-index: 10;
+  background: linear-gradient(to top, black, transparent);
+  opacity: 0.6;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.content {
+  z-index: 20;
 }
 </style>

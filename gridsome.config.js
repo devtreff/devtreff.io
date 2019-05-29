@@ -5,10 +5,12 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: "devtreff",
-  plugins: [
-    {
-      use: "gridsome-plugin-tailwindcss"
-    }
-  ]
+  siteName: "devtreff"
+  // chainWebpack: config => {
+  //   config.module
+  //     .rule("scss")
+  //     .oneOf("normal")
+  //     .use(["tailwindcss", "autoprefixer"])
+  //     .loader("postcss-loader");
+  // }
 };

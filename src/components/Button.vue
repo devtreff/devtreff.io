@@ -1,6 +1,12 @@
 <template>
-  <button class="relative">
-    <div class="background absolute"/>
+  <button
+    class="bg-transparent border border-white px-4 hover:text-gray-900 hover:bg-white"
+    v-if="variant == 'hollow'"
+  >
+    <slot/>
+  </button>
+  <button class="relative" v-else>
+    <div class="background bg-orange-500 absolute"/>
     <div class="container relative">
       <slot/>
     </div>
@@ -10,15 +16,14 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  name: "Button"
+  name: "Button",
+  props: ["variant"]
 });
 </script>
 
 <style lang="scss" scoped>
 .background {
-  position: absolute;
   z-index: 10;
-  background: orange;
   top: 0;
   bottom: 0;
   left: 0;
@@ -28,6 +33,7 @@ export default Vue.extend({
 }
 
 button {
+  transition: all 200ms ease-in-out;
   &:hover,
   &:focus {
     .background {

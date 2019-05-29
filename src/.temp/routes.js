@@ -1,9 +1,5 @@
 export default [
   {
-    path: "/about",
-    component: () => import(/* webpackChunkName: "page--src--pages--about-vue" */ "/Users/geraldurschitz/Projects/devtreff/devtreff.io/src/pages/About.vue")
-  },
-  {
     path: "/archive",
     component: () => import(/* webpackChunkName: "page--src--pages--archive-vue" */ "/Users/geraldurschitz/Projects/devtreff/devtreff.io/src/pages/Archive.vue")
   },

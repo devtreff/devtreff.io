@@ -17,4 +17,46 @@ module.exports = function(api) {
   api.loadSource(async store => {
     store.addMetaData("coverImage", "~/images/DevTreff3_35.jpg");
   });
+
+  const postcssImport = require("postcss-import")();
+
+  const tailwind = require("tailwindcss");
+
+  const postcssPresetEnv = require("postcss-import")(null);
+
+  const purgecss = require("@fullhuman/postcss-purgecss")(null);
+
+  api.chainWebpack(config => {
+    config.module
+      .rule("scss")
+      .oneOf("normal")
+      .use("postcss-loader")
+      .tap(options => {
+        options.plugins.push(postcssImport);
+
+        options.plugins.unshift(tailwind);
+
+        options.plugins.push(postcssPresetEnv);
+
+        process.env.NODE_ENV === "production" && options.plugins.push(purgecss);
+
+        return options;
+      });
+
+    config.module
+      .rule("css")
+      .oneOf("normal")
+      .use("postcss-loader")
+      .tap(options => {
+        options.plugins.push(postcssImport);
+
+        options.plugins.unshift(tailwind);
+
+        options.plugins.push(postcssPresetEnv);
+
+        process.env.NODE_ENV === "production" && options.plugins.push(purgecss);
+
+        return options;
+      });
+  });
 };

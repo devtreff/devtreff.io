@@ -1,0 +1,33 @@
+<template>
+  <header class="header">
+    <strong>
+      <g-link to="/">
+        <span :class="['flex items-center', isBlack ? 'text-dark' : 'text-white']">
+          <img
+            class="logo mr-3 mb-1"
+            :src="isBlack ? '/images/devtreff-font-logo-black.svg' : '/images/devtreff-font-logo.svg'"
+          >
+          {{ $static.metaData.siteName }}
+        </span>
+      </g-link>
+    </strong>
+    <nav class="nav">
+      <g-link class="nav__link" to="/archive">Archiv</g-link>
+    </nav>
+  </header>
+</template>
+
+<static-query>
+query {
+  metaData {
+    siteName
+  }
+}
+</static-query>
+
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  props: ["isBlack"]
+});
+</script>
