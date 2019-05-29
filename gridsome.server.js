@@ -22,9 +22,9 @@ module.exports = function(api) {
 
   const tailwind = require("tailwindcss");
 
-  const postcssPresetEnv = require("postcss-import")(null);
+  const postcssPresetEnv = require("postcss-import")({});
 
-  const purgecss = require("@fullhuman/postcss-purgecss")(null);
+  const purgecss = require("@fullhuman/postcss-purgecss")({});
 
   api.chainWebpack(config => {
     config.module
