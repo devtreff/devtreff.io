@@ -22,9 +22,36 @@ module.exports = function(api) {
 
   const tailwind = require("tailwindcss");
 
-  const postcssPresetEnv = require("postcss-import")({});
+  const purgeConfig = {
+    content: [
+      "./src/**/*.vue",
+      "./src/**/*.js",
+      "./src/**/*.jsx",
+      "./src/**/*.ts",
+      "./src/**/*.tsx",
+      "./src/**/*.html",
+      "./src/**/*.pug",
+      "./src/**/*.md"
+    ],
+    whitelist: [
+      "body",
+      "html",
+      "img",
+      "a",
+      "g-image",
+      "g-image--lazy",
+      "g-image--loaded"
+    ],
+    defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
+  };
 
-  const purgecss = require("@fullhuman/postcss-purgecss")({});
+  const presetEnvConfig = {
+    stage: 0
+  };
+
+  const postcssPresetEnv = require("postcss-import")(presetEnvConfig);
+
+  const purgecss = require("@fullhuman/postcss-purgecss")(purgeConfig);
 
   api.chainWebpack(config => {
     config.module
