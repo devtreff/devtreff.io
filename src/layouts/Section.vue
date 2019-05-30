@@ -8,16 +8,14 @@
   >
     <div :class="['lg:max-w-2xl w-full px-5', isReversed ? 'lg:pl-12' : 'lg:pr-12']">
       <div class="mb-8">
-        <Title class="lg:text-xl">{{section.title}}</Title>
+        <Title class="lg:text-xl">{{section.content.title}}</Title>
       </div>
       <div class="leading-relaxed whitespace-pre-line">
-        <vue-simple-markdown :source="section.body"></vue-simple-markdown>
+        <vue-simple-markdown :source="section.content.body"></vue-simple-markdown>
       </div>
     </div>
-    <div class="mt-6 lg:mt-0" v-if="section.image">
-      <slot name="image">
-        <g-image width="500" :src="section.image"/>
-      </slot>
+    <div class="mt-6 lg:mt-0" v-if="section.content.image">
+      <g-image :src="section.content.image"/>
     </div>
     <div class="flex-1" v-else/>
   </section>
@@ -34,3 +32,11 @@ export default Vue.extend({
   props: ["section", "isReversed"]
 });
 </script>
+
+<style lang="scss" scoped>
+img {
+  @media (min-width: theme("screens.lg")) {
+    max-width: 500px;
+  }
+}
+</style>

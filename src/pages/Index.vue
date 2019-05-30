@@ -47,7 +47,7 @@ query Section{
     <template #main>
       <Section
         v-for="(section, index) in sections"
-        :key="section._uid"
+        :key="section.uuid"
         :section="section"
         :is-reversed="index%2!=0"
       />
@@ -121,7 +121,7 @@ export default {
   computed: {
     sections() {
       console.log(this.$static);
-      return this.$static.allSection.edges.map(({ node }) => node.content);
+      return this.$static.allSection.edges.map(({ node }) => node);
     }
   }
 };
