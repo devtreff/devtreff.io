@@ -19,11 +19,7 @@ class StoryblokSource {
 
     const client = new StoryblokClient({ accessToken });
     const response = await client.get("cdn/stories", {
-      filter_query: {
-        component: {
-          in: "section"
-        }
-      }
+      starts_with: "sections"
     });
 
     const sections = addContentType({
@@ -31,11 +27,8 @@ class StoryblokSource {
     });
 
     response.data.stories.forEach(story => {
-      sections.addNode({
-        uuid: story.uuid,
-        body: story.content.body,
-        title: story.content.title
-      });
+      console.log(story);
+      sections.addNode({ ...story, path: `${story.uuid}` });
     });
   }
 }

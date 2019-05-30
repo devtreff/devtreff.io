@@ -4,8 +4,13 @@ import "./main.css";
 import FullImageLayout from "~/layouts/FullImageLayout.vue";
 import TitleLayout from "~/layouts/TitleLayout.vue";
 import Section from "~/layouts/Section.vue";
+import StoryblokVue from "storyblok-vue";
+import VueSimpleMarkdown from "vue-simple-markdown";
 
 export default function(Vue, { router, head, isClient }) {
+  Vue.use(StoryblokVue);
+  Vue.use(VueSimpleMarkdown);
+
   Vue.component("FullImageLayout", FullImageLayout);
   Vue.component("TitleLayout", TitleLayout);
   Vue.component("Section", Section);

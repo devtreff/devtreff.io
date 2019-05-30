@@ -1,3 +1,21 @@
+<static-query>
+query Section{
+  allSection{
+    edges {
+      node {
+        content {
+          body
+          title
+          image
+          _uid
+          component
+        }
+      }
+    }
+  }
+}
+</static-query>
+
 <template>
   <FullImageLayout image="/images/DevTreff3_35.jpg">
     <template #hero>
@@ -27,31 +45,12 @@
       </div>
     </template>
     <template #main>
-      <Section v-for="section in sections" :key="section.uuid" :title="section.title">
-        <template #content>
-          <p class="leading-relaxed">{{section.body}}</p>
-        </template>
-        <template #image>
-          <g-image src="~/images/DevTreff3_09.jpg" width="500"/>
-        </template>
-      </Section>
-      <Section title="Die Idee" :is-reversed="true">
-        <template #content>
-          <p class="leading-relaxed">
-            Das DevTreff entstand aus der Idee, in der Region Mostviertel einen Entwicklerstammtisch
-            ins Leben zu rufen und somit eine Plattform zum Erfahrungsaustausch für Programmierer zu schaffen.
-          </p>
-          <p class="mt-8 leading-relaxed">
-            Neben den Vorträgen steht das lockere Netzwerken und Know-How Transfer im Vordergrund um Stück für Stück
-            eine Community und Technologie-Szene im Raum Amstetten zu schaffen – und das an einem Ort,
-            an dem gerade die Zukunft gestaltet wird – der Remise Amstetten.
-            Das DevTreff findet 1 mal pro Quartal statt. Die Teilnahme ist kostenlos.
-          </p>
-        </template>
-        <template #image>
-          <g-image src="~/images/DevTreff3_07.jpg" width="500"/>
-        </template>
-      </Section>
+      <Section
+        v-for="(section, index) in sections"
+        :key="section._uid"
+        :section="section"
+        :is-reversed="index%2!=0"
+      />
       <FullImage alt="Remise" src="/images/remise.webp" :hasVerticalGradient="true">
         <template #content>
           <div class="h-full flex flex-col items-center justify-end pb-16">
@@ -103,19 +102,6 @@
   </FullImageLayout>
 </template>
 
-<static-query>
-query Section{
-  allSection{
-    edges {
-      node {
-        body
-        title
-      }
-    }
-  }
-}
-</static-query>
-
 <script>
 import Button from "~/components/Button.vue";
 import FullImage from "~/components/FullImage.vue";
@@ -134,7 +120,8 @@ export default {
   },
   computed: {
     sections() {
-      return this.$static.allSection.edges.map(({ node }) => node);
+      console.log(this.$static);
+      return this.$static.allSection.edges.map(({ node }) => node.content);
     }
   }
 };
