@@ -8,20 +8,8 @@
 module.exports = function(api) {
   const resolveConfig = require("tailwindcss/resolveConfig");
   const tailwindConfig = resolveConfig(require("./tailwind.config"));
-  const { GraphQLJSON, GraphQLJSONObject } = require("graphql-type-json");
 
   api.loadSource(store => {
-    // Use the Data Store API here: https://gridsome.org/docs/data-store-api
-
-    // const tailwind = store.addContentType("Tailwind");
-
-    // tailwind.addSchemaField("config", () => ({
-    //   type: GraphQLJSONObject,
-    //   resolve() {
-    //     return tailwindConfig;
-    //   }
-    // }));
-
     store.addMetaData("tailwind", {
       theme: { screens: tailwindConfig.theme.screens }
     });

@@ -27,18 +27,9 @@
       </div>
     </template>
     <template #main>
-      <Section title="Die Geschichte des DevTreff">
+      <Section v-for="section in sections" :key="section.uuid" :title="section.title">
         <template #content>
-          <p class="leading-relaxed">
-            Das DevTreff entstand aus der Idee, in der Region Mostviertel einen Entwicklerstammtisch
-            ins Leben zu rufen und somit eine Plattform zum Erfahrungsaustausch für Programmierer zu schaffen.
-          </p>
-          <p class="mt-8 leading-relaxed">
-            Neben den Vorträgen steht das lockere Netzwerken und Know-How Transfer im Vordergrund um Stück für Stück
-            eine Community und Technologie-Szene im Raum Amstetten zu schaffen – und das an einem Ort,
-            an dem gerade die Zukunft gestaltet wird – der Remise Amstetten.
-            Das DevTreff findet 1 mal pro Quartal statt. Die Teilnahme ist kostenlos.
-          </p>
+          <p class="leading-relaxed">{{section.body}}</p>
         </template>
         <template #image>
           <g-image src="~/images/DevTreff3_09.jpg" width="500"/>
@@ -112,6 +103,19 @@
   </FullImageLayout>
 </template>
 
+<static-query>
+query Section{
+  allSection{
+    edges {
+      node {
+        body
+        title
+      }
+    }
+  }
+}
+</static-query>
+
 <script>
 import Button from "~/components/Button.vue";
 import FullImage from "~/components/FullImage.vue";
@@ -127,6 +131,11 @@ export default {
   },
   metaInfo: {
     title: "Hello, world!"
+  },
+  computed: {
+    sections() {
+      return this.$static.allSection.edges.map(({ node }) => node);
+    }
   }
 };
 </script>

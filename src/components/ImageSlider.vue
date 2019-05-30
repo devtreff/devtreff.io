@@ -98,14 +98,18 @@ export default Vue.extend({
   @media (max-width: theme("screens.md")) {
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-    scroll-padding: 50%;
+    scroll-padding: 0 50%;
+    @apply px-8;
+  }
+
+  & > * {
+    scroll-snap-align: center;
   }
 
   img {
-    scroll-snap-align: center;
-
     @media (max-width: theme("screens.md")) {
       scroll-snap-align: center;
+      width: 100vw;
     }
 
     @media (min-width: theme("screens.md")) {
