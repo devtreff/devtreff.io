@@ -6,11 +6,4 @@
 
 module.exports = {
   siteName: "devtreff"
-  // chainWebpack: config => {
-  //   config.module
-  //     .rule("scss")
-  //     .oneOf("normal")
-  //     .use(["tailwindcss", "autoprefixer"])
-  //     .loader("postcss-loader");
-  // }
 };
