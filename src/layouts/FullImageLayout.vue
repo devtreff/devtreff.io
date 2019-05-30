@@ -1,6 +1,11 @@
 <template>
   <div>
-    <FullImage :hasGradient="true" alt="DevTreff" :src="image">
+    <FullImage
+      :has-gradient="hasGradient"
+      :has-vertical-gradient="hasVerticalGradient"
+      alt="DevTreff"
+      :src="image"
+    >
       <template #content>
         <div class="h-full container mx-auto px-4 pt-0 md:pt-4 lg:pt-6 xl:pt-8">
           <div class="flex flex-col h-full">
@@ -52,7 +57,19 @@ export default Vue.extend({
     Header,
     FullImage
   },
-  props: ["image"]
+  props: {
+    image: {
+      type: String
+    },
+    hasVerticalGradient: {
+      type: Boolean,
+      default: false
+    },
+    hasGradient: {
+      type: Boolean,
+      default: false
+    }
+  }
 });
 </script>
 

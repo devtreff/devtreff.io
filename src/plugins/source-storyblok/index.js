@@ -10,14 +10,15 @@ class StoryblokSource {
 
   constructor(api, options) {
     this.options = options;
-    api.loadSource(args => this.fetchContent(args));
+    api.loadSource(args => this.fetchSections(args));
+    api.loadSource(args => this.fetchEvents(args));
   }
 
-  async fetchContent(store) {
+  async fetchSections(store) {
     const { addContentType } = store;
     const { accessToken } = this.options;
-
     const client = new StoryblokClient({ accessToken });
+
     const response = await client.get("cdn/stories", {
       starts_with: "sections"
     });
@@ -27,8 +28,42 @@ class StoryblokSource {
     });
 
     response.data.stories.forEach(story => {
-      console.log(story);
-      sections.addNode({ ...story, path: `${story.uuid}` });
+      const sectionNode = {
+        id: story.uuid,
+        fields: {
+          ...story,
+          path: `${story.uuid}`
+        },
+        path: `${story.uuid}`
+      };
+      console.log(sectionNode);
+      sections.addNode(sectionNode);
+    });
+  }
+
+  async fetchEvents(store) {
+    const { addContentType } = store;
+    const { accessToken } = this.options;
+    const client = new StoryblokClient({ accessToken });
+
+    const response = await client.get("cdn/stories", {
+      starts_with: "events",
+      resolve_relations: "city"
+    });
+
+    const event = addContentType({ typeName: "Event" });
+
+    response.data.stories.forEach(story => {
+      const eventNode = {
+        id: story.uuid,
+        fields: {
+          ...story,
+          path: story.full_slug
+        },
+        path: story.full_slug
+      };
+      console.log(eventNode);
+      event.addNode(eventNode);
     });
   }
 }

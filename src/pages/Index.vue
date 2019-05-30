@@ -1,5 +1,5 @@
 <static-query>
-query Section{
+query{
   allSection{
     edges {
       node {
@@ -13,11 +13,31 @@ query Section{
       }
     }
   }
+  allEvent{
+    edges{
+      node{
+        path
+        name
+        tag_list
+        content{
+          date
+          speaker{
+            name
+            topic_title
+            topic_subtitle
+          }
+          city{
+            name
+          }
+        }
+      }
+    }
+  }
 }
 </static-query>
 
 <template>
-  <FullImageLayout image="/images/DevTreff3_35.jpg">
+  <FullImageLayout :has-gradient="true" image="/images/DevTreff3_35.jpg">
     <template #hero>
       <div class="max-w-2xl">
         <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold pb-3 lg:pb-8">Der DevTreff</h1>
@@ -27,19 +47,20 @@ query Section{
           innovativen Vorträgen rund um Technologien und Digitalisierung passt.
         </p>
         <div class="mt-6 lg:mt-8 flex justify-between lg:flex-row flex-col">
-          <Button class="text-left flex-auto">
-            <div class="font-bold">Amstetten</div>
-            <div class="text-xs">16. Mai 2019</div>
+          <Button
+            tag="a"
+            v-for="event in upcomingEvents"
+            :key="event.uuid"
+            class="text-left flex-auto"
+            :href="event.path"
+          >
+            <div class="font-bold">{{event.content.city.name}}</div>
+            <div class="text-xs">{{event.luxonDate.toFormat('d. LLLL yyyy')}}</div>
           </Button>
 
-          <Button class="text-left flex-auto">
-            <div class="font-bold">Siegburg</div>
-            <div class="text-xs">25. Juni 2019</div>
-          </Button>
-
-          <Button class="text-left flex-auto">
+          <Button tag="a" href="/archive" class="text-left flex-auto">
             <div class="font-bold">Archiv</div>
-            <div class="text-xs">7 DevTreffs in den letzten 2 Jahren</div>
+            <div class="text-xs">{{pastEvents.length}} DevTreffs in den letzten 2 Jahren</div>
           </Button>
         </div>
       </div>
@@ -47,7 +68,7 @@ query Section{
     <template #main>
       <Section
         v-for="(section, index) in sections"
-        :key="section.uuid"
+        :key="section.id"
         :section="section"
         :is-reversed="index%2!=0"
       />
@@ -107,6 +128,7 @@ import Button from "~/components/Button.vue";
 import FullImage from "~/components/FullImage.vue";
 import Title from "~/components/Title.vue";
 import ImageSlider from "~/components/ImageSlider.vue";
+import { DateTime } from "luxon";
 
 export default {
   components: {
@@ -120,8 +142,35 @@ export default {
   },
   computed: {
     sections() {
-      console.log(this.$static);
       return this.$static.allSection.edges.map(({ node }) => node);
+    },
+    mappedEvents() {
+      return this.$static.allEvent.edges.map(({ node }) => {
+        const luxonDate = DateTime.fromFormat(
+          node.content.date,
+          "yyyy-MM-dd HH:mm"
+        );
+        return {
+          ...node,
+          luxonDate
+        };
+      });
+    },
+    pastEvents() {
+      const upcoming = this.mappedEvents.filter(({ luxonDate }) => {
+        const now = DateTime.local();
+        return luxonDate < now;
+      });
+
+      return upcoming;
+    },
+    upcomingEvents() {
+      const upcoming = this.mappedEvents.filter(({ luxonDate }) => {
+        const now = DateTime.local();
+        return luxonDate >= now;
+      });
+
+      return upcoming;
     }
   }
 };

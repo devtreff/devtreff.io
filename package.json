@@ -9,6 +9,7 @@
   "dependencies": {
     "graphql-type-json": "^0.3.0",
     "gridsome": "^0.6.0",
+    "luxon": "^1.15.0",
     "markdown-it": "^8.4.2",
     "markdown-it-abbr": "^1.0.4",
     "markdown-it-deflist": "^2.0.3",

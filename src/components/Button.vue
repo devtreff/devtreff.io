@@ -1,23 +1,32 @@
 <template>
-  <button
-    class="bg-transparent border border-white px-4 hover:text-gray-900 hover:bg-white"
+  <component
+    :is="tag"
+    class="tag bg-transparent border border-white px-4 hover:text-gray-900 hover:bg-white"
     v-if="variant == 'hollow'"
   >
     <slot/>
-  </button>
-  <button class="relative" v-else>
+  </component>
+  <component :is="tag" class="tag relative" v-else>
     <div class="background bg-orange-500 absolute"/>
     <div class="container relative">
       <slot/>
     </div>
-  </button>
+  </component>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
   name: "Button",
-  props: ["variant"]
+  props: {
+    variant: {
+      type: String
+    },
+    tag: {
+      type: String,
+      default: "button"
+    }
+  }
 });
 </script>
 
@@ -32,8 +41,9 @@ export default Vue.extend({
   transition: max-width 200ms ease-in-out;
 }
 
-button {
+.tag {
   transition: all 200ms ease-in-out;
+  cursor: pointer;
   &:hover,
   &:focus {
     .background {
