@@ -14,6 +14,9 @@ module.exports = {
       options: {
         accessToken: process.env.STORYBLOK_ACCESS_TOKEN
       }
+    },
+    {
+      use: 'gridsome-plugin-typescript',
     }
   ]
 };

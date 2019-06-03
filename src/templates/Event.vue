@@ -4,7 +4,7 @@ query Event($path: String!) {
     name
     content{
       date
-      city{
+      location{
         name
       }
     }
@@ -16,10 +16,10 @@ query Event($path: String!) {
   <FullImageLayout image="/images/remise.webp" :has-vertical-gradient="true">
     <template #hero>
       <div class="h-full flex flex-col items-center justify-end pb-16">
-        <div class="bg-orange-600 px-2 font-bold">DevTreff am {{event.content.date}}</div>
+        <div class="bg-orange-600 px-2 font-bold">Am <FormatDate :date-string="event.content.date"/></div>
         <h1
           class="mt-4 text-4xl lg:text-5xl font-bold"
-        >DevTreff {{event.content.city.name}} {{event.name}}</h1>
+        >{{event.name}}</h1>
       </div>
     </template>
     <template #main></template>
@@ -29,10 +29,12 @@ query Event($path: String!) {
 <script lang="ts">
 import Vue from "vue";
 import FullImage from "../components/FullImage.vue";
+import FormatDate from "../components/FormatDate.vue";
 
 export default Vue.extend({
   components: {
-    FullImage
+    FullImage,
+    FormatDate
   },
   mounted() {
     console.log(this);

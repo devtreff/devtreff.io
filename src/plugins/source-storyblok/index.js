@@ -36,7 +36,6 @@ class StoryblokSource {
         },
         path: `${story.uuid}`
       };
-      console.log(sectionNode);
       sections.addNode(sectionNode);
     });
   }
@@ -48,7 +47,7 @@ class StoryblokSource {
 
     const response = await client.get("cdn/stories", {
       starts_with: "events",
-      resolve_relations: "city"
+      resolve_relations: "location"
     });
 
     const event = addContentType({ typeName: "Event" });
@@ -62,7 +61,7 @@ class StoryblokSource {
         },
         path: story.full_slug
       };
-      console.log(eventNode);
+
       event.addNode(eventNode);
     });
   }

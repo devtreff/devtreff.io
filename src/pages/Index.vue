@@ -26,8 +26,11 @@ query{
             topic_title
             topic_subtitle
           }
-          city{
+          location{
             name
+            content {
+              city
+            }
           }
         }
       }
@@ -54,8 +57,10 @@ query{
             class="text-left flex-auto"
             :href="event.path"
           >
-            <div class="font-bold">{{event.content.city.name}}</div>
-            <div class="text-xs">{{event.luxonDate.toFormat('d. LLLL yyyy')}}</div>
+            <div class="font-bold">{{event.content.location.content.city}}</div>
+            <div class="text-xs">
+              <FormatDate :date-string="event.content.date"/>
+            </div>
           </Button>
 
           <Button tag="a" href="/archive" class="text-left flex-auto">
@@ -72,15 +77,9 @@ query{
         :section="section"
         :is-reversed="index%2!=0"
       />
-      <FullImage alt="Remise" src="/images/remise.webp" :hasVerticalGradient="true">
-        <template #content>
-          <div class="h-full flex flex-col items-center justify-end pb-16">
-            <div class="bg-orange-600 px-2 font-bold">DevTreff am 16. Mai 2019</div>
-            <h1 class="mt-4 text-4xl lg:text-5xl font-bold">Amstetten - Quartier A</h1>
-            <Button class="mt-10" variant="hollow">Weitere Informationen</Button>
-          </div>
-        </template>
-      </FullImage>
+
+      <EventSlider :events="mappedEvents"/>
+      
       <section class="py-16 lg:py-32">
         <div class="max-w-xl mx-auto relative" :style="{zIndex: 10}">
           <Title class="text-lg md:text-xl lg:text-4xl">Vergangene DevTreff</Title>
@@ -126,16 +125,20 @@ query{
 <script>
 import Button from "~/components/Button.vue";
 import FullImage from "~/components/FullImage.vue";
+import EventSlider from "~/components/EventSlider.vue";
 import Title from "~/components/Title.vue";
 import ImageSlider from "~/components/ImageSlider.vue";
 import { DateTime } from "luxon";
+import FormatDate from '~/components/FormatDate.vue';
 
 export default {
   components: {
     Button,
     Title,
     FullImage,
-    ImageSlider
+    ImageSlider,
+    EventSlider,
+    FormatDate
   },
   metaInfo: {
     title: "Hello, world!"
