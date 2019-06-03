@@ -1,5 +1,5 @@
 <template>
-  <intersect @enter="setKeyListener" @leave="removeKeyListener">
+  <Intersect @enter="setKeyListener" @leave="removeKeyListener">
     <div class="slider flex overflow-x-auto">
       <FullImage v-for="(event, index) in events" :key="event.id" alt="Remise" src="/images/remise.webp" :hasVerticalGradient="true">
         <template #content>
@@ -17,14 +17,13 @@
         </template>
       </FullImage>
     </div>
-  </intersect>
+  </Intersect>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import FullImage from './FullImage.vue';
 import Button from './Button.vue';
-import Intersect from 'vue-intersect'
 import FormatDate from './FormatDate.vue';
 
 type Event = {
@@ -35,7 +34,6 @@ type Event = {
 export default Vue.extend({
   components: {
     FullImage,
-    Intersect,
     Button,
     FormatDate
   },

@@ -58,7 +58,7 @@ module.exports = function(api) {
 
   const purgecss = require("@fullhuman/postcss-purgecss")(purgeConfig);
 
-  api.chainWebpack(config => {
+  api.chainWebpack((config, {isServer}) => {
     config.module
       .rule("scss")
       .oneOf("normal")
@@ -75,6 +75,14 @@ module.exports = function(api) {
         return options;
       });
 
+    // const nodeExternals = require('webpack-node-externals')
+
+    // if (isServer) {
+    //   config.externals(nodeExternals({
+    //     whitelist: [/\.(?!(?:js|json)$).{1,5}$/, /^vue-intersect/, /\.css$/, /\?vue&type=style/]
+    //   }));
+    // }
+
     config.module
       .rule("css")
       .oneOf("normal")
@@ -90,5 +98,6 @@ module.exports = function(api) {
 
         return options;
       });
+    
   });
 };
