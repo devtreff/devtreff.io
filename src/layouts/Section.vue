@@ -2,11 +2,13 @@
   <section
     v-editable="section"
     :class="[
-      'flex pt-8 lg:py-16 items-center justify-end', 
+      'relative flex pt-8 lg:py-16 items-center justify-end overflow-hidden', 
       isReversed ? 'flex-col lg:flex-row-reverse' : 'flex-col lg:flex-row bg-gray-200'
     ]"
   >
-    <div :class="['lg:max-w-2xl w-full px-5', isReversed ? 'lg:pl-12' : 'lg:pr-12']">
+    <img v-if="!isReversed" class="absolute" src="../images/dots_small.svg" :style="{left: '-50px', top: 0}"/>
+    <img v-if="isReversed" class="absolute" src="../images/dots_small.svg" :style="{right: '-50px', top: '-150px'}"/>
+    <div :class="['lg:max-w-2xl w-full px-5 z-10', isReversed ? 'lg:pl-12 bg-white' : 'bg-gray-200 lg:pr-12']">
       <div class="mb-8">
         <Title class="lg:text-xl">{{section.content.title}}</Title>
       </div>
@@ -14,7 +16,7 @@
         <vue-simple-markdown :source="section.content.body"></vue-simple-markdown>
       </div>
     </div>
-    <div class="mt-6 lg:mt-0" v-if="section.content.image">
+    <div class="mt-6 lg:mt-0 z-10" v-if="section.content.image">
       <g-image :src="section.content.image"/>
     </div>
     <div class="flex-1" v-else/>

@@ -80,12 +80,16 @@ query{
 
       <EventSlider :events="mappedEvents"/>
       
-      <section class="py-16 lg:py-32">
-        <div class="max-w-xl mx-auto relative" :style="{zIndex: 10}">
+      <section class="py-16 lg:py-32 relative overflow-hidden">
+        <img class="absolute z-0" src="../images/dots_big.svg" :style="{height: '600px', left: '80px', top: '60px'}"/>
+
+        <div class="z-20 max-w-xl mx-auto relative">
           <Title class="text-lg md:text-xl lg:text-4xl">Vergangene DevTreff</Title>
         </div>
 
-        <ImageSlider>
+        <div class="absolute z-10 bg-gray-200 lg:h-64" :style="{width: '70%', left: '35%', top: '150px'}"/>
+
+        <ImageSlider class="relative z-10">
           <g-image
             class="relative"
             src="~/images/DevTreff3_07.jpg"

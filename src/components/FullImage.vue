@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center min-h-screen relative h-full w-full overflow-hidden text-white">
+  <div class="flex justify-center min-h-screen min-w-full relative h-full w-full overflow-hidden text-white">
     <div class="absolute full-bg-img" :style="imageStyle"></div>
     <div class="transparent-gradient" v-if="hasGradient"/>
     <div class="transparent-vertical-gradient" v-if="hasVerticalGradient"/>

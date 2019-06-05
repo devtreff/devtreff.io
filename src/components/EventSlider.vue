@@ -7,9 +7,9 @@
             <div class="flex flex-col items-center">
               <div class="bg-orange-600 px-2 font-bold">{{event.name}} am <FormatDate :date-string="event.content.date"/></div>
               <div class="mt-4 flex items-center">
-                <i :class="{'opacity-50':index === 0, 'cursor-pointer':index !== 0}" @click="scrollToSlide(index - 1)" class="material-icons text-5xl">chevron_left</i>
-                <h1 class="text-2xl lg:text-5xl font-bold">{{event.content.location.content.city}} - {{event.content.location.name}}</h1>
-                <i :class="{'opacity-50':index === events.length - 1, 'cursor-pointer':index !== events.length - 1}" @click="scrollToSlide(index + 1)" class="material-icons text-5xl">chevron_right</i>
+                <i :class="{'opacity-25':index === 0, 'cursor-pointer':index !== 0}" @click="scrollToSlide(index - 1)" class="material-icons text-5xl">chevron_left</i>
+                <h1 class="lg:px-16 text-2xl lg:text-5xl font-bold">{{event.content.location.content.city}} - {{event.content.location.name}}</h1>
+                <i :class="{'opacity-25':index === events.length - 1, 'cursor-pointer':index !== events.length - 1}" @click="scrollToSlide(index + 1)" class="material-icons text-5xl">chevron_right</i>
               </div>
               <Button tag="a" :href="event.path" class="mt-10" variant="hollow">Weitere Informationen</Button>
             </div>
@@ -79,11 +79,16 @@ export default Vue.extend({
 
 <style lang="scss">
 .slider {
-    scroll-snap-type: x mandatory;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+}
+
+.slider::-webkit-scrollbar { 
+  width: 0 !important 
 }
 
 .slider > * {
-    min-width: 100vw;
-    scroll-snap-align: center;
+  scroll-snap-align: center;
 }
 </style>

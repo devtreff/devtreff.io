@@ -22,7 +22,7 @@
     <main class="main text-dark">
       <slot name="main"/>
     </main>
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-gray-900 text-white py-12 z-10 relative">
       <div class="w-full flex justify-center">
         <div class="w-48 pb-12">
           <img src="/images/best-it-logo.png">
