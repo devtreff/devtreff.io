@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
 
 // This is where project configuration and plugin options are located.
@@ -16,7 +17,7 @@ module.exports = {
       }
     },
     {
-      use: 'gridsome-plugin-typescript',
+      use: "gridsome-plugin-typescript"
     }
   ]
 };

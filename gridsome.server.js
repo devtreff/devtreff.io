@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 // Server API makes it possible to hook into various parts of Gridsome
 // on server-side and add custom data to the GraphQL data layer.
 // Learn more: https://gridsome.org/docs/server-api
@@ -5,7 +6,7 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
-module.exports = function(api) {
+module.exports = function (api) {
   const resolveConfig = require("tailwindcss/resolveConfig");
   const tailwindConfig = resolveConfig(require("./tailwind.config"));
 
@@ -58,7 +59,7 @@ module.exports = function(api) {
 
   const purgecss = require("@fullhuman/postcss-purgecss")(purgeConfig);
 
-  api.chainWebpack((config, {isServer}) => {
+  api.chainWebpack((config, { isServer }) => {
     config.module
       .rule("scss")
       .oneOf("normal")
@@ -75,14 +76,6 @@ module.exports = function(api) {
         return options;
       });
 
-    // const nodeExternals = require('webpack-node-externals')
-
-    // if (isServer) {
-    //   config.externals(nodeExternals({
-    //     whitelist: [/\.(?!(?:js|json)$).{1,5}$/, /^vue-intersect/, /\.css$/, /\?vue&type=style/]
-    //   }));
-    // }
-
     config.module
       .rule("css")
       .oneOf("normal")
@@ -98,6 +91,5 @@ module.exports = function(api) {
 
         return options;
       });
-    
   });
 };

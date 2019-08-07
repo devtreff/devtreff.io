@@ -1,8 +1,8 @@
 <template>
   <div class="no-scrollbars w-full md:overflow-x-auto pb-8 pt-8">
     <div class="image-container relative flex w-full lg:ml-64">
-      <div class="md:flex-1"></div>
-      <slot/>
+      <div class="md:flex-1" :style="{ maxWidth: '300px' }"></div>
+      <slot />
     </div>
   </div>
 </template>
@@ -85,7 +85,6 @@ export default Vue.extend({
   }
 });
 </script>
-
 
 <style lang="scss">
 .no-scrollbars {
