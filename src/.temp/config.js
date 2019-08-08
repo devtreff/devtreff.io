@@ -3,5 +3,5 @@ export default {
   "siteName": "devtreff",
   "titleTemplate": "%s - devtreff",
   "siteDescription": "",
-  "version": "0.6.1"
+  "version": "0.6.7"
 }

@@ -9,14 +9,11 @@ export default [
     component: () => import(/* webpackChunkName: "page--src--pages--index-vue" */ "/Users/geraldurschitz/Projects/devtreff.io/src/pages/Index.vue")
   },
   {
-    path: "/events/amstetten-4",
-    component: () => import(/* webpackChunkName: "page--src--templates--event-vue" */ "/Users/geraldurschitz/Projects/devtreff.io/src/templates/Event.vue"),
-    meta: { data: true }
-  },
-  {
-    path: "/events/amstetten-5",
-    component: () => import(/* webpackChunkName: "page--src--templates--event-vue" */ "/Users/geraldurschitz/Projects/devtreff.io/src/templates/Event.vue"),
-    meta: { data: true }
+    path: "/editions/amstetten",
+    component: () => import(/* webpackChunkName: "page--src--templates--edition-vue" */ "/Users/geraldurschitz/Projects/devtreff.io/src/templates/Edition.vue"),
+    meta: {
+      data: true
+    }
   },
   {
     name: "404",

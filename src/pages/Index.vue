@@ -1,6 +1,6 @@
 <static-query>
 query{
-  allSection{
+  allMainSection{
     edges {
       node {
         content {
@@ -9,6 +9,31 @@ query{
           image
           _uid
           component
+        }
+      }
+    }
+  }
+  allEdition{
+    edges{
+      node{
+        path
+        name
+        full_slug
+        nextEvent {
+          name
+          content {
+            date
+            hero_image
+          }
+        }
+        content {
+          hero_image
+          location {
+            name
+            content {
+              city
+            }
+          }
         }
       }
     }
@@ -22,16 +47,22 @@ query{
         content{
           date
           teaser_image
+          edition{
+            name
+            full_slug
+            content {
+              location {
+                name
+                content {
+                  city
+                }
+              }
+            }
+          }
           speaker{
             name
             topic_title
             topic_subtitle
-          }
-          location{
-            name
-            content {
-              city
-            }
           }
         }
       }
@@ -59,10 +90,10 @@ query{
             :key="event.uuid"
             tag="a"
             class="text-left flex-auto"
-            :href="event.path"
+            :href="event.content.edition.full_slug"
           >
             <div class="font-bold">
-              {{ event.content.location.content.city }}
+              {{ event.content.edition.content.location.content.city }}
             </div>
             <div class="text-xs">
               <FormatDate :date-string="event.content.date" />
@@ -82,11 +113,14 @@ query{
       <Section
         v-for="(section, index) in sections"
         :key="section.id"
-        :section="section"
+        :description="section.content.body"
+        :title="section.content.title"
+        :image="section.content.image"
         :is-reversed="index % 2 != 0"
+        :show-dots="true"
       />
 
-      <EventSlider :events="mappedEvents" />
+      <EditionSlider :editions="editions" />
 
       <section class="py-16 lg:py-32 relative overflow-hidden">
         <img
@@ -111,7 +145,6 @@ query{
             v-for="event in pastEvents"
             :key="event.id"
             :src="event.content.teaser_image"
-            :title="event.content.location.content.city"
             :subtitle="formatDate(event.content.date)"
             class="relative"
           />
@@ -123,7 +156,7 @@ query{
 
 <script>
 import Button from "~/components/Button.vue";
-import EventSlider from "~/components/EventSlider.vue";
+import EditionSlider from "~/components/EditionSlider.vue";
 import Title from "~/components/Title.vue";
 import ImageSlider from "~/components/ImageSlider.vue";
 import { DateTime } from "luxon";
@@ -136,7 +169,7 @@ export default {
     Button,
     Title,
     ImageSlider,
-    EventSlider,
+    EditionSlider,
     FormatDate,
     TeaserImage
   },
@@ -145,7 +178,10 @@ export default {
   },
   computed: {
     sections() {
-      return this.$static.allSection.edges.map(({ node }) => node);
+      return this.$static.allMainSection.edges.map(({ node }) => node);
+    },
+    editions() {
+      return this.$static.allEdition.edges.map(({ node }) => node);
     },
     mappedEvents() {
       return this.$static.allEvent.edges.map(({ node }) => {

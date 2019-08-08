@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/camelcase, @typescript-eslint/no-var-requires */
 
 const StoryblokClient = require("storyblok-js-client");
+const produce = require("immer").produce;
+const { DateTime } = require("luxon");
 
 class StoryblokSource {
   static defaultOptions() {
@@ -31,7 +33,7 @@ class StoryblokSource {
 
     this.createStoryblokContentType({
       store,
-      typeName: "Section",
+      typeName: "MainSection",
       stories: response.data.stories
     });
   }
@@ -39,30 +41,88 @@ class StoryblokSource {
   async fetchEditions(store) {
     const client = this.getClient();
 
-    const response = await client.get("cdn/stories", {
+    const eventsResponse = await client.get("cdn/stories", {
+      starts_with: "events",
+      filter_query: {
+        date: {
+          "gt-date": DateTime.fromObject({ zone: "Europe/Vienna" }).toISODate()
+        }
+      }
+    });
+
+    const nextEventsEditionMap = eventsResponse.data.stories.reduce(
+      (acc, event) => {
+        const editionUUID = event.content.edition;
+        const eventDate = DateTime.fromISO(event.content.date);
+
+        if (acc[editionUUID]) {
+          const oldEventDate = DateTime.fromISO(acc[editionUUID].content.date);
+
+          if (oldEventDate > eventDate) {
+            return acc;
+          }
+        }
+
+        return {
+          ...acc,
+          [editionUUID]: event
+        };
+      },
+      {}
+    );
+
+    const editionsResponse = await client.get("cdn/stories", {
       starts_with: "editions",
-      resolve_relations: "location"
+      resolve_relations: "location,section"
+    });
+
+    const stories = editionsResponse.data.stories.map(story => {
+      return produce(story, draft => {
+        draft.nextEvent = nextEventsEditionMap[story.uuid];
+      });
     });
 
     this.createStoryblokContentType({
       store,
       typeName: "Edition",
-      stories: response.data.stories
+      stories
     });
   }
 
   async fetchEvents(store) {
     const client = this.getClient();
 
-    const response = await client.get("cdn/stories", {
+    const locationsResponse = await client.get("cdn/stories", {
+      starts_with: "locations"
+    });
+
+    const locationsMap = locationsResponse.data.stories.reduce(
+      (acc, location) => {
+        return {
+          ...acc,
+          [location.uuid]: location
+        };
+      },
+      {}
+    );
+
+    const eventsResponse = await client.get("cdn/stories", {
       starts_with: "events",
-      resolve_relations: "edition,location"
+      resolve_relations: "edition"
+    });
+
+    const stories = eventsResponse.data.stories.map(story => {
+      const locationUUID = story.content.edition.content.location;
+      const location = locationsMap[locationUUID];
+      return produce(story, draft => {
+        draft.content.edition.content.location = location;
+      });
     });
 
     this.createStoryblokContentType({
       store,
       typeName: "Event",
-      stories: response.data.stories
+      stories
     });
   }
 

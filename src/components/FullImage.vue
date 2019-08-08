@@ -1,10 +1,12 @@
 <template>
-  <div class="flex justify-center min-h-screen min-w-full relative h-full w-full overflow-hidden text-white">
+  <div
+    class="flex justify-center min-h-screen min-w-full relative h-full w-full overflow-hidden text-white"
+  >
     <div class="absolute full-bg-img" :style="imageStyle"></div>
-    <div class="transparent-gradient" v-if="hasGradient"/>
-    <div class="transparent-vertical-gradient" v-if="hasVerticalGradient"/>
+    <div v-if="hasGradient" class="transparent-gradient" />
+    <div v-if="hasVerticalGradient" class="transparent-vertical-gradient" />
     <div class="content absolute h-full w-full">
-      <slot name="content"/>
+      <slot name="content" />
     </div>
   </div>
 </template>
@@ -12,7 +14,14 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  props: ["hasGradient", "hasVerticalGradient", "src"],
+  props: {
+    hasGradient: Boolean,
+    hasVerticalGradient: Boolean,
+    src: {
+      type: String,
+      required: true
+    }
+  },
   computed: {
     imageStyle() {
       return {

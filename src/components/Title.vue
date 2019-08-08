@@ -1,8 +1,10 @@
 <template>
-  <div class="inline-flex relative bg-gray-900 text-white text-center px-6 py-1">
+  <div
+    class="inline-flex relative bg-gray-900 text-white text-center px-6 py-1"
+  >
     <div class="strip absolute bg-orange-500 h-full"></div>
     <component :is="tag" class="font-bold">
-      <slot/>
+      <slot />
     </component>
   </div>
 </template>
@@ -27,4 +29,3 @@ export default Vue.extend({
   top: 0;
 }
 </style>
-
