@@ -60,7 +60,7 @@ export default Vue.extend({
       required: true
     },
     image: {
-      type: Image,
+      type: String,
       required: false,
       default: null
     },
