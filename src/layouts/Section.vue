@@ -42,11 +42,10 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
+<script>
 import Title from "../components/Title.vue";
 
-export default Vue.extend({
+export default {
   components: {
     Title
   },
@@ -75,7 +74,7 @@ export default Vue.extend({
         : this.hasWhiteBackground;
     }
   }
-});
+};
 </script>
 
 <style lang="scss" scoped>

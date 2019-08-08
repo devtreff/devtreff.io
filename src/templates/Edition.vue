@@ -139,12 +139,11 @@ query Edition($path: String!) {
   </FullImageLayout>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
+<script>
 import FormatDate from "../components/FormatDate.vue";
 import Title from "../components/Title.vue";
 
-export default Vue.extend({
+export default {
   components: {
     Title,
     FormatDate
@@ -161,5 +160,5 @@ export default Vue.extend({
     }
   },
   mounted() {}
-});
+};
 </script>

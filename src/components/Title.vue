@@ -9,17 +9,19 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
+<script>
+export default {
   props: {
-    title: String,
+    title: {
+      type: String,
+      required: true
+    },
     tag: {
       type: String,
       default: "h1"
     }
   }
-});
+};
 </script>
 
 <style lang="scss" scoped>
