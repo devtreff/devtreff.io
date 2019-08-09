@@ -7,6 +7,12 @@ query Edition($path: String!) {
       content{
         hero_image
         date
+        agenda{
+          _uid
+          time
+          title
+          subtitle
+        }
       }
     }
     content{
@@ -14,6 +20,7 @@ query Edition($path: String!) {
       sections{
         title
         body
+        image
       }
       location{
         name
@@ -23,6 +30,8 @@ query Edition($path: String!) {
           city
           street
           postcode
+          lat
+          long
         }
       }
     }
@@ -43,11 +52,10 @@ query Edition($path: String!) {
       <div class="flex h-full flex-col items-center justify-center pb-16">
         <div v-if="hasNextEvent" class="flex flex-col items-center">
           <div class="bg-orange-600 px-2 font-bold">
-            Am <FormatDate :date-string="edition.nextEvent.content.date" />
+            Am
+            <FormatDate :date-string="edition.nextEvent.content.date" />
           </div>
-          <h1 class="mt-4 text-2xl md:text-4xl lg:text-5xl font-bold">
-            {{ edition.nextEvent.name }}
-          </h1>
+          <h1 class="mt-4 text-2xl md:text-4xl lg:text-5xl font-bold">{{ edition.nextEvent.name }}</h1>
         </div>
       </div>
     </template>
@@ -83,8 +91,7 @@ query Edition($path: String!) {
           <a
             class="bg-gray-900 hover:bg-gray-800 text-white text-center px-6 py-1 inline-flex font-bold"
             href="mailto:contact@devtreff.io"
-            >Bewirb dich als Speaker</a
-          >
+          >Bewirb dich als Speaker</a>
         </div>
         <div :style="{ 'max-width': '500px' }" class="flex-1"></div>
       </section>
@@ -96,6 +103,7 @@ query Edition($path: String!) {
           <div class="mb-8">
             <Title class="lg:text-xl">Ablauf</Title>
           </div>
+          <Agenda :agenda="edition.nextEvent.content.agenda" />
         </div>
         <div :style="{ 'max-width': '500px' }" class="flex-1"></div>
       </section>
@@ -110,23 +118,24 @@ query Edition($path: String!) {
         :show-dots="true"
       />
       <section
-        class="relative flex pt-8 pb-8 lg:py-16 items-center justify-end overflow-hidden flex-col lg:flex-row bg-gray-200"
+        :class="[
+          'relative flex pt-8 pb-8 lg:py-16 items-center justify-end overflow-hidden flex-col lg:flex-row',
+          edition.content.sections.length % 2 == 0 ? 'bg-gray-200' : ''
+        ]"
       >
-        <div class="lg:max-w-2xl w-full px-5 z-10 bg-gray-200 lg:pr-12">
+        <div
+          :class="[
+            'lg:max-w-2xl w-full px-5 z-10 lg:pr-12',
+            edition.content.sections.length % 2 == 0 ? 'bg-gray-200' : ''
+          ]"
+        >
           <div class="mb-8">
             <Title class="lg:text-xl">Die Location</Title>
           </div>
-          <p class="text-gray-600">
-            {{ location.content.city }}
-          </p>
-          <h1 class="text-4xl font-bold">
-            {{ location.content.title }}
-          </h1>
+          <p class="text-gray-600">{{ location.content.city }}</p>
+          <h1 class="text-4xl font-bold">{{ location.content.title }}</h1>
           <div class="whitespace-pre-line leading-relaxed">
-            <vue-simple-markdown
-              class="markdown-container"
-              :source="location.content.description"
-            ></vue-simple-markdown>
+            <vue-simple-markdown class="markdown-container" :source="location.content.description"></vue-simple-markdown>
           </div>
           <p class="text-gray-600 pt-5">
             {{ location.content.street }}, {{ location.content.postcode }}
@@ -135,6 +144,7 @@ query Edition($path: String!) {
         </div>
         <div :style="{ 'max-width': '500px' }" class="flex-1"></div>
       </section>
+      <Map :lat="parseFloat(location.content.lat)" :lng="parseFloat(location.content.long)" />
     </template>
   </FullImageLayout>
 </template>
@@ -142,11 +152,15 @@ query Edition($path: String!) {
 <script>
 import FormatDate from "../components/FormatDate.vue";
 import Title from "../components/Title.vue";
+import Agenda from "../components/Agenda.vue";
+import Map from "../components/Map.vue";
 
 export default {
   components: {
     Title,
-    FormatDate
+    FormatDate,
+    Agenda,
+    Map
   },
   computed: {
     edition() {
@@ -157,6 +171,12 @@ export default {
     },
     hasNextEvent() {
       return !!this.edition.nextEvent;
+    },
+    coordinates() {
+      return {
+        lat: parseFloat(this.location.content.lat),
+        lng: parseFloat(this.location.content.long)
+      };
     }
   },
   mounted() {}

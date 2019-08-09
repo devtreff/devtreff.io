@@ -38,6 +38,7 @@
     "vue-class-component": "^7.1.0",
     "vue-intersect": "^1.1.3",
     "vue-simple-markdown": "^1.0.9",
+    "vue2-google-maps": "^0.10.7",
     "vuetify": "^1.5.14",
     "webpack-node-externals": "^1.7.2"
   },

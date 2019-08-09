@@ -12,10 +12,6 @@
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      required: true
-    },
     tag: {
       type: String,
       default: "h1"

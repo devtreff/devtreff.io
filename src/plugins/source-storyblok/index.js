@@ -4,6 +4,7 @@ const StoryblokClient = require("storyblok-js-client");
 const produce = require("immer").produce;
 const { DateTime } = require("luxon");
 
+const version = process.env.GRIDSOME_STORYBLOK_VERSION;
 class StoryblokSource {
   static defaultOptions() {
     return {
@@ -28,6 +29,7 @@ class StoryblokSource {
     const client = this.getClient();
 
     const response = await client.get("cdn/stories", {
+      version,
       starts_with: "sections"
     });
 
@@ -42,6 +44,7 @@ class StoryblokSource {
     const client = this.getClient();
 
     const eventsResponse = await client.get("cdn/stories", {
+      version,
       starts_with: "events",
       filter_query: {
         date: {
@@ -72,6 +75,7 @@ class StoryblokSource {
     );
 
     const editionsResponse = await client.get("cdn/stories", {
+      version,
       starts_with: "editions",
       resolve_relations: "location,section"
     });
@@ -93,6 +97,7 @@ class StoryblokSource {
     const client = this.getClient();
 
     const locationsResponse = await client.get("cdn/stories", {
+      version,
       starts_with: "locations"
     });
 
@@ -107,6 +112,7 @@ class StoryblokSource {
     );
 
     const eventsResponse = await client.get("cdn/stories", {
+      version,
       starts_with: "events",
       resolve_relations: "edition"
     });
