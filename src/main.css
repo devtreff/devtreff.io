@@ -3,8 +3,3 @@
 @tailwind components;
 
 @tailwind utilities;
-
-
-.vue-map {
-    height: 100%;
-}

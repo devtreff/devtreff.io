@@ -20,11 +20,6 @@ export default {
       required: true
     }
   },
-  methods: {
-    open(lat, lng) {
-      window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`,'_blank')
-    }
-  },
   data() {
     return {
       options: {
@@ -206,6 +201,17 @@ export default {
         ]
       }
     };
-  }
+  },
+  methods: {
+    open(lat, lng) {
+      window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`,'_blank')
+    }
+  },
 };
 </script>
+
+<style>
+.vue-map-container > .vue-map {
+  height: 100%;
+}
+</style>
