@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { colors } = require("tailwindcss/defaultTheme");
+const { colors, width, height } = require("tailwindcss/defaultTheme");
 const gradients = require("tailwindcss-gradients");
 
 module.exports = {
@@ -29,10 +29,12 @@ module.exports = {
         colors: theme("colors")
       }),
       height: {
+        ...height,
         80: "20rem",
         96: "24rem"
       },
       width: {
+        ...width,
         80: "20rem",
         96: "24rem",
         160: "40rem"
