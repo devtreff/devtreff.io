@@ -3,7 +3,7 @@
     :class="[
       'relative flex pt-8 lg:py-16 items-center justify-end overflow-hidden',
       isReversed ? 'flex-col lg:flex-row-reverse' : 'flex-col lg:flex-row',
-      showWhiteBackground ? 'bg-white' : 'bg-gray-200'
+      showWhiteBackground ? 'bg-white' : 'bg-gray-100'
     ]"
   >
     <img
@@ -22,7 +22,7 @@
       :class="[
         'lg:max-w-2xl w-full px-5 z-10',
         isReversed ? 'lg:pl-12 bg-white' : 'lg:pr-12',
-        showWhiteBackground ? 'bg-white' : 'bg-gray-200'
+        showWhiteBackground ? 'bg-white' : 'bg-gray-100'
       ]"
     >
       <div class="mb-8">
@@ -64,13 +64,16 @@ export default {
       default: null
     },
     isReversed: Boolean,
-    hasWhiteBackground: Boolean,
+    hasWhiteBackground: {
+      type: Boolean,
+      default: undefined
+    },
     showDots: Boolean
   },
   computed: {
     showWhiteBackground() {
       return this.hasWhiteBackground === undefined
-        ? this.isReversed
+        ? !this.isReversed
         : this.hasWhiteBackground;
     }
   }

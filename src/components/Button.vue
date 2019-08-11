@@ -1,15 +1,15 @@
 <template>
   <component
     :is="tag"
-    class="tag bg-transparent border border-white px-4 hover:text-gray-900 hover:bg-white"
     v-if="variant == 'hollow'"
+    class="tag bg-transparent border border-white px-4 hover:text-gray-900 hover:bg-white"
   >
-    <slot/>
+    <slot />
   </component>
-  <component :is="tag" class="tag relative" v-else>
-    <div class="background bg-orange-500 absolute"/>
+  <component :is="tag" v-else class="tag relative">
+    <div class="background bg-orange-500 absolute" />
     <div class="container relative">
-      <slot/>
+      <slot />
     </div>
   </component>
 </template>
@@ -20,7 +20,8 @@ export default Vue.extend({
   name: "Button",
   props: {
     variant: {
-      type: String
+      type: String,
+      default: null
     },
     tag: {
       type: String,

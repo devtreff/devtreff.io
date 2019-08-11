@@ -10,11 +10,7 @@
         <div class="h-full container mx-auto px-4 pt-0 md:pt-4 lg:pt-6 xl:pt-8">
           <div class="flex flex-col h-full">
             <Header />
-            <div class="flex-1 flex justify-center md:items-center">
-              <div class="max-w-4xl w-full mt-5 lg:mt-0">
-                <slot name="hero" />
-              </div>
-            </div>
+            <slot name="hero" />
           </div>
         </div>
       </template>
@@ -75,18 +71,6 @@ export default Vue.extend({
 </script>
 
 <style>
-html,
-body {
-  height: 100%;
-}
-
-body {
-  font-family: "Raleway", sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.5;
-}
-
 .header {
   display: flex;
   justify-content: space-between;

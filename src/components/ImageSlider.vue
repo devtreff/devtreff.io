@@ -25,28 +25,24 @@ query {
 import Vue from "vue";
 
 function handleMouseOverImage(event) {
-  let left = 0;
-  const rect = event.target.getBoundingClientRect();
-  const halfTargetWidth = rect.width / 2;
-  const halfScreenWidth = screen.width / 2;
-  const halfTargetWidthPos = event.target.offsetLeft + halfTargetWidth;
-
-  if (screen.width >= this.mdScreenSize) {
-    let delta = halfTargetWidth;
-    if (event.clientX > event.target.x + halfTargetWidth) {
-      left = this.$el.scrollLeft - delta;
-    } else {
-      left = this.$el.scrollLeft + delta;
-    }
-
-    this.$el.scrollTo({
-      left,
-      behavior: "smooth"
-    });
-  }
+  // let left = 0;
+  // const rect = event.target.getBoundingClientRect();
+  // const halfTargetWidth = rect.width / 2;
+  // if (screen.width >= this.mdScreenSize) {
+  //   let delta = halfTargetWidth;
+  //   if (event.clientX > event.target.x + halfTargetWidth) {
+  //     left = this.$el.scrollLeft - delta;
+  //   } else {
+  //     left = this.$el.scrollLeft + delta;
+  //   }
+  //   this.$el.scrollTo({
+  //     left,
+  //     behavior: "smooth"
+  //   });
+  // }
 }
 
-function handleMouseOverContainer(event) {
+function handleMouseOverContainer() {
   this.$el.scrollTo({
     left: 0,
     behavior: "smooth"
@@ -114,9 +110,6 @@ export default Vue.extend({
     @media (min-width: theme("screens.md")) {
       cursor: pointer;
       transition: transform 200ms ease-in-out;
-      &:hover {
-        transform: scale(1.05);
-      }
     }
   }
 }

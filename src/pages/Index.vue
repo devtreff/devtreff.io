@@ -47,6 +47,9 @@ query{
         content{
           date
           teaser_image
+          blog_post{
+            full_slug
+          }
           edition{
             name
             full_slug
@@ -74,38 +77,42 @@ query{
 <template>
   <FullImageLayout :has-gradient="true" image="/images/DevTreff3_35.jpg">
     <template #hero>
-      <div class="max-w-2xl">
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold pb-3 lg:pb-8">
-          Der DevTreff
-        </h1>
-        <p class="leading-relaxed lg:leading-loose">
-          Das DevTreff findet in der Remise Amstetten, am Gelände des Quartier A
-          statt. Ein Ort an dem aktuell die Zukunft neu erfunden wird und
-          deshalb ideal zu unseren innovativen Vorträgen rund um Technologien
-          und Digitalisierung passt.
-        </p>
-        <div class="mt-6 lg:mt-8 flex justify-between lg:flex-row flex-col">
-          <Button
-            v-for="event in upcomingEvents"
-            :key="event.uuid"
-            tag="a"
-            class="text-left flex-auto"
-            :href="event.content.edition.full_slug"
-          >
-            <div class="font-bold">
-              {{ event.content.edition.content.location.content.city }}
-            </div>
-            <div class="text-xs">
-              <FormatDate :date-string="event.content.date" />
-            </div>
-          </Button>
+      <div class="flex-1 flex justify-center md:items-center">
+        <div class="max-w-4xl w-full mt-5 lg:mt-0">
+          <div class="max-w-2xl">
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold pb-3 lg:pb-8">
+              Der DevTreff
+            </h1>
+            <p class="leading-relaxed lg:leading-loose">
+              Das DevTreff findet in der Remise Amstetten, am Gelände des
+              Quartier A statt. Ein Ort an dem aktuell die Zukunft neu erfunden
+              wird und deshalb ideal zu unseren innovativen Vorträgen rund um
+              Technologien und Digitalisierung passt.
+            </p>
+            <div class="mt-6 lg:mt-8 flex justify-between lg:flex-row flex-col">
+              <Button
+                v-for="event in upcomingEvents"
+                :key="event.uuid"
+                tag="a"
+                class="text-left flex-auto"
+                :href="event.content.edition.full_slug"
+              >
+                <div class="font-bold">
+                  {{ event.content.edition.content.location.content.city }}
+                </div>
+                <div class="text-xs">
+                  <FormatDate :date-string="event.content.date" />
+                </div>
+              </Button>
 
-          <Button tag="a" href="/archive" class="text-left flex-auto">
-            <div class="font-bold">Archiv</div>
-            <div class="text-xs">
-              {{ pastEvents.length }} DevTreffs in den letzten 2 Jahren
+              <Button tag="a" href="/archive" class="text-left flex-auto">
+                <div class="font-bold">Archiv</div>
+                <div class="text-xs">
+                  {{ pastEvents.length }} DevTreffs in den letzten 2 Jahren
+                </div>
+              </Button>
             </div>
-          </Button>
+          </div>
         </div>
       </div>
     </template>
@@ -141,12 +148,13 @@ query{
         />
 
         <ImageSlider class="relative z-10">
-          <TeaserImage
-            v-for="event in pastEvents"
+          <BlogTeaserImage
+            v-for="event in pastEventsWithBlogPosts"
             :key="event.id"
+            :href="event.content.blog_post.full_slug"
             :src="event.content.teaser_image"
+            :title="event.content.edition.content.location.content.city"
             :subtitle="formatDate(event.content.date)"
-            class="relative"
           />
         </ImageSlider>
       </section>
@@ -160,8 +168,7 @@ import EditionSlider from "~/components/EditionSlider.vue";
 import Title from "~/components/Title.vue";
 import ImageSlider from "~/components/ImageSlider.vue";
 import { DateTime } from "luxon";
-import FormatDate from "~/components/FormatDate.vue";
-import TeaserImage from "~/components/TeaserImage.vue";
+import BlogTeaserImage from "~/components/BlogTeaserImage.vue";
 import formatDate from "~/helpers/formatDate.ts";
 
 export default {
@@ -170,8 +177,7 @@ export default {
     Title,
     ImageSlider,
     EditionSlider,
-    FormatDate,
-    TeaserImage
+    BlogTeaserImage
   },
   metaInfo: {
     title: "DevTreff"
@@ -202,6 +208,9 @@ export default {
       });
 
       return upcoming;
+    },
+    pastEventsWithBlogPosts() {
+      return this.pastEvents.filter(({ content }) => content.blog_post);
     },
     upcomingEvents() {
       const upcoming = this.mappedEvents.filter(({ luxonDate }) => {

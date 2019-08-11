@@ -65,13 +65,11 @@
 import Vue from "vue";
 import FullImage from "./FullImage.vue";
 import Button from "./Button.vue";
-import FormatDate from "./FormatDate.vue";
 
 export default Vue.extend({
   components: {
     FullImage,
-    Button,
-    FormatDate
+    Button
   },
   props: {
     editions: {

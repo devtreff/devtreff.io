@@ -18,6 +18,7 @@ class StoryblokSource {
     api.loadSource(this.fetchSections.bind(this));
     api.loadSource(this.fetchEditions.bind(this));
     api.loadSource(this.fetchEvents.bind(this));
+    api.loadSource(this.fetchBlogPosts.bind(this));
   }
 
   getClient() {
@@ -38,6 +39,31 @@ class StoryblokSource {
       typeName: "MainSection",
       stories: response.data.stories
     });
+  }
+
+  async getEditions() {
+    const client = this.getClient();
+
+    const editionsResponse = await client.get("cdn/stories", {
+      version,
+      starts_with: "editions",
+      resolve_relations: "location,section"
+    });
+
+    return editionsResponse;
+  }
+
+  async getEditionsMap() {
+    const editionsResponse = await this.getEditions();
+
+    const editionsMap = editionsResponse.data.stories.reduce((acc, edition) => {
+      return {
+        ...acc,
+        [edition.uuid]: edition
+      };
+    }, {});
+
+    return editionsMap;
   }
 
   async fetchEditions(store) {
@@ -74,11 +100,7 @@ class StoryblokSource {
       {}
     );
 
-    const editionsResponse = await client.get("cdn/stories", {
-      version,
-      starts_with: "editions",
-      resolve_relations: "location,section"
-    });
+    const editionsResponse = await this.getEditions();
 
     const stories = editionsResponse.data.stories.map(story => {
       return produce(story, draft => {
@@ -93,7 +115,7 @@ class StoryblokSource {
     });
   }
 
-  async fetchEvents(store) {
+  async getLocationsMap() {
     const client = this.getClient();
 
     const locationsResponse = await client.get("cdn/stories", {
@@ -111,10 +133,18 @@ class StoryblokSource {
       {}
     );
 
+    return locationsMap;
+  }
+
+  async fetchEvents(store) {
+    const client = this.getClient();
+
+    const locationsMap = await this.getLocationsMap();
+
     const eventsResponse = await client.get("cdn/stories", {
       version,
       starts_with: "events",
-      resolve_relations: "edition"
+      resolve_relations: "edition,blog_post"
     });
 
     const stories = eventsResponse.data.stories.map(story => {
@@ -128,6 +158,40 @@ class StoryblokSource {
     this.createStoryblokContentType({
       store,
       typeName: "Event",
+      stories
+    });
+  }
+
+  async fetchBlogPosts(store) {
+    const client = this.getClient();
+
+    const editionsMap = await this.getEditionsMap();
+
+    const blogPostsResponse = await client.get("cdn/stories", {
+      version,
+      starts_with: "blog-posts",
+      resolve_relations: "event"
+    });
+
+    const stories = blogPostsResponse.data.stories.map(story => {
+      let location = null;
+
+      if (story.content.event) {
+        const edition = editionsMap[story.content.event.content.edition];
+        location = edition.content.location;
+      }
+
+      return produce(story, draft => {
+        draft.eventLocation = location;
+        draft.content.content_components = draft.content.content_components.map(
+          contentComponent => JSON.stringify(contentComponent)
+        );
+      });
+    });
+
+    this.createStoryblokContentType({
+      store,
+      typeName: "BlogPost",
       stories
     });
   }
