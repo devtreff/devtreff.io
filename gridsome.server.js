@@ -6,7 +6,7 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
-module.exports = function (api) {
+module.exports = function(api) {
   const resolveConfig = require("tailwindcss/resolveConfig");
   const tailwindConfig = resolveConfig(require("./tailwind.config"));
 
@@ -71,7 +71,7 @@ module.exports = function (api) {
 
         options.plugins.push(postcssPresetEnv);
 
-        process.env.NODE_ENV === "production" && options.plugins.push(purgecss);
+        // process.env.NODE_ENV === "production" && options.plugins.push(purgecss);
 
         return options;
       });
