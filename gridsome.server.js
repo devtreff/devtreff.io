@@ -87,7 +87,7 @@ module.exports = function(api) {
 
         options.plugins.push(postcssPresetEnv);
 
-        process.env.NODE_ENV === "production" && options.plugins.push(purgecss);
+        // process.env.NODE_ENV === "production" && options.plugins.push(purgecss);
 
         return options;
       });
