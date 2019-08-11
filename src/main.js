@@ -6,7 +6,8 @@ import Section from "~/layouts/Section.vue";
 import StoryblokVue from "storyblok-vue";
 import VueSimpleMarkdown from "vue-simple-markdown";
 import * as VueGoogleMaps from "vue2-google-maps";
-import VModal from "vue-js-modal";
+import VModal from "vue-js-modal/dist/ssr.index";
+import "vue-js-modal/dist/styles.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faFacebook,
