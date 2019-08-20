@@ -77,25 +77,27 @@ export default {
   },
   data() {
     return {
-      index: 0,
+      currentIndex: 0,
       keyListener: null
     };
   },
   methods: {
     scrollToSlide(index) {
+      this.currentIndex = index;
+      this.animateToSlide(this.currentIndex);
+    },
+    animateToSlide(index) {
       const slider = this.$el;
       const scrollPosition = index * slider.clientWidth;
       slider.scrollTo({ left: scrollPosition, behavior: "smooth" });
     },
     onKeyDown(event) {
-      let index = this.index;
       if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
         if (event.key === "ArrowRight") {
-          index = index + 1;
+          this.scrollToSlide(this.currentIndex + 1);
         } else if (event.key === "ArrowLeft") {
-          index = index - 1;
+          this.scrollToSlide(this.currentIndex - 1);
         }
-        this.scrollToSlide(index % this.events.length);
       }
     },
     setKeyListener() {
