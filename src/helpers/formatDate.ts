@@ -7,6 +7,7 @@ function formatDate(
     format = "d. LLLL yyyy"
   }: { parseFormat?: string; format?: string } = {}
 ): string {
+  if(!dateString) return '';
   return DateTime.fromFormat(dateString, parseFormat)
     .setLocale("de")
     .toFormat(format);
