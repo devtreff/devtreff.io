@@ -7,19 +7,33 @@ query Edition($path: String!) {
       content{
         hero_image
         date
-        speaker{
-          _uid
+        location{
           name
-          image
+          content{
+            title
+            description
+            city
+            street
+            postcode
+            lat
+            long
+          }
+        }
+        speaker_slots{
           topic_title
           topic_subtitle
-          position
-          company
-          about
-          facebook_url
-          github_url
-          twitter_url
-          instagram_url
+          speaker{
+            _uid
+            name
+            image
+            position
+            company
+            about
+            facebook_url
+            github_url
+            twitter_url
+            instagram_url
+          }
         }
         agenda{
           _uid
@@ -35,18 +49,6 @@ query Edition($path: String!) {
         title
         body
         image
-      }
-      location{
-        name
-        content{
-          title
-          description
-          city
-          street
-          postcode
-          lat
-          long
-        }
       }
     }
   }
@@ -82,7 +84,9 @@ query Edition($path: String!) {
     </template>
     <template #main>
       <SpeakerSection
-        :speaker="edition.nextEvent ? edition.nextEvent.content.speaker : []"
+        :speaker-slots="
+          edition.nextEvent ? edition.nextEvent.content.speaker_slots : []
+        "
       />
       <section
         v-if="hasNextEvent"
@@ -107,12 +111,14 @@ query Edition($path: String!) {
         :show-dots="true"
       />
       <LocationSection
+        v-if="location"
         :has-white-background="edition.content.sections.length % 2 != 0"
         :location="location"
       />
       <Map
-        :lat="parseFloat(location.content.lat)"
-        :lng="parseFloat(location.content.long)"
+        v-if="location"
+        :lat="location ? parseFloat(location.content.lat) : 0"
+        :lng="location ? parseFloat(location.content.long) : 0"
       />
     </template>
   </FullImageLayout>
@@ -138,7 +144,9 @@ export default {
       return this.$page.edition;
     },
     location() {
-      return this.edition.content.location;
+      return this.edition.nextEvent
+        ? this.edition.nextEvent.content.location
+        : null;
     },
     hasNextEvent() {
       return !!this.edition.nextEvent;

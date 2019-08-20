@@ -2,7 +2,7 @@
   <Intersect @enter="setKeyListener" @leave="removeKeyListener">
     <div class="slider flex overflow-x-auto">
       <FullImage
-        v-for="edition in editions"
+        v-for="(edition, editionIndex) in editions"
         :key="edition.id"
         alt="Remise"
         :src="
@@ -25,24 +25,23 @@
               <div class="mt-4 flex items-center">
                 <i
                   :class="{
-                    'opacity-25': index === 0,
-                    'cursor-pointer': index !== 0
+                    'opacity-25': editionIndex === 0,
+                    'cursor-pointer': editionIndex !== 0
                   }"
                   class="material-icons text-5xl"
-                  @click="scrollToSlide(index - 1)"
+                  @click="scrollToSlide(editionIndex - 1)"
                   >chevron_left</i
                 >
                 <h1 class="lg:px-16 text-2xl lg:text-5xl font-bold">
-                  {{ edition.content.location.content.city }} -
-                  {{ edition.content.location.name }}
+                  {{ edition.content.name }}
                 </h1>
                 <i
                   :class="{
-                    'opacity-25': index === editions.length - 1,
-                    'cursor-pointer': index !== editions.length - 1
+                    'opacity-25': editionIndex === editions.length - 1,
+                    'cursor-pointer': editionIndex !== editions.length - 1
                   }"
                   class="material-icons text-5xl"
-                  @click="scrollToSlide(index + 1)"
+                  @click="scrollToSlide(editionIndex + 1)"
                   >chevron_right</i
                 >
               </div>
@@ -61,12 +60,11 @@
   </Intersect>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
+<script>
 import FullImage from "./FullImage.vue";
 import Button from "./Button.vue";
 
-export default Vue.extend({
+export default {
   components: {
     FullImage,
     Button
@@ -108,7 +106,7 @@ export default Vue.extend({
       this.keyListener = null;
     }
   }
-});
+};
 </script>
 
 <style lang="scss">

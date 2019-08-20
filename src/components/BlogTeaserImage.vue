@@ -1,6 +1,5 @@
 <template>
   <a
-    :href="href"
     class="block image-container overflow-hidden relative cursor-pointer"
     :style="{ width: '300px' }"
   >
@@ -21,9 +20,8 @@
   </a>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
+<script>
+export default {
   props: {
     src: {
       type: String,
@@ -36,13 +34,9 @@ export default Vue.extend({
     subtitle: {
       type: String,
       default: ""
-    },
-    href: {
-      type: String,
-      required: true
     }
   }
-});
+};
 </script>
 
 <style lang="scss" scoped>

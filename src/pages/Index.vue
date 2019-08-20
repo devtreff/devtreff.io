@@ -27,6 +27,7 @@ query{
           }
         }
         content {
+          name
           hero_image
           location {
             name
@@ -47,8 +48,13 @@ query{
         content{
           date
           teaser_image
-          blog_post{
+          blog_post {
             full_slug
+            content {
+              direct_link {
+                url
+              }
+            }
           }
           edition{
             name
@@ -94,7 +100,7 @@ query{
                 v-for="event in upcomingEvents"
                 :key="event.uuid"
                 tag="a"
-                class="text-left flex-auto"
+                class="text-left flex-auto max-w-xs"
                 :href="event.content.edition.full_slug"
               >
                 <div class="font-bold">
@@ -105,12 +111,12 @@ query{
                 </div>
               </Button>
 
-              <Button tag="a" href="/archive" class="text-left flex-auto">
+              <!-- <Button tag="a" href="/archive" class="text-left flex-auto">
                 <div class="font-bold">Archiv</div>
                 <div class="text-xs">
                   {{ pastEvents.length }} DevTreffs in den letzten 2 Jahren
                 </div>
-              </Button>
+              </Button> -->
             </div>
           </div>
         </div>
@@ -151,7 +157,11 @@ query{
           <BlogTeaserImage
             v-for="event in pastEventsWithBlogPosts"
             :key="event.id"
-            :href="event.content.blog_post.full_slug"
+            target="_blank"
+            :href="
+              event.content.blog_post.content.direct_link &&
+                event.content.blog_post.content.direct_link.url
+            "
             :src="event.content.teaser_image"
             :title="event.content.edition.content.location.content.city"
             :subtitle="formatDate(event.content.date)"

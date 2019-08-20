@@ -15,6 +15,7 @@ class StoryblokSource {
 
   constructor(api, options) {
     this.options = options;
+    api.loadSource(this.fetchSpeakers.bind(this));
     api.loadSource(this.fetchSections.bind(this));
     api.loadSource(this.fetchEditions.bind(this));
     api.loadSource(this.fetchEvents.bind(this));
@@ -38,6 +39,23 @@ class StoryblokSource {
       store,
       typeName: "MainSection",
       stories: response.data.stories
+    });
+  }
+
+  async fetchSpeakers(store) {
+    const client = this.getClient();
+
+    const speakersResponse = await client.get("cdn/stories", {
+      version,
+      starts_with: "speakers"
+    });
+
+    const stories = speakersResponse.data.stories.map(story => story);
+
+    return this.createStoryblokContentType({
+      store,
+      typeName: "Speaker",
+      stories
     });
   }
 
@@ -72,6 +90,7 @@ class StoryblokSource {
     const eventsResponse = await client.get("cdn/stories", {
       version,
       starts_with: "events",
+      resolve_relations: "location",
       filter_query: {
         date: {
           "gt-date": DateTime.fromObject({ zone: "Europe/Vienna" }).toISODate()
@@ -92,9 +111,22 @@ class StoryblokSource {
           }
         }
 
+        const nextEvent = produce(event, draft => {
+          draft.content.speaker_slots = draft.content.speaker_slots.map(
+            ({ speaker, ...rest }) => {
+              return {
+                ...rest,
+                speaker: store
+                  .getContentType("Speaker")
+                  .findNode({ id: speaker }).content
+              };
+            }
+          );
+        });
+
         return {
           ...acc,
-          [editionUUID]: event
+          [editionUUID]: nextEvent
         };
       },
       {}
@@ -148,10 +180,13 @@ class StoryblokSource {
     });
 
     const stories = eventsResponse.data.stories.map(story => {
-      const locationUUID = story.content.edition.content.location;
-      const location = locationsMap[locationUUID];
+      const edition = story.content.edition;
+      const locationUUID = edition ? edition.content.location : null;
+      const location = locationUUID ? locationsMap[locationUUID] : null;
       return produce(story, draft => {
-        draft.content.edition.content.location = location;
+        if (location) {
+          draft.content.edition.content.location = location;
+        }
       });
     });
 

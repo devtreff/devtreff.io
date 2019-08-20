@@ -26,11 +26,38 @@
       </div>
       <hr class="bg-gray-500 opacity-75 h-px max-w-4xl" />
       <div class="font-bold flex justify-center text-xs pt-5">
-        <g-link class="nav__link" to="/archive">Impressum</g-link>
-        <g-link class="nav__link" to="/archive">DevTreff:Amstetten</g-link>
-        <g-link class="nav__link" to="/archive">DevTreff:Siegburg</g-link>
+        <a href="#" class="nav__link" @click="showImprintModal">Impressum</a>
+        <g-link class="nav__link" to="/editions/amstetten"
+          >DevTreff:Amstetten</g-link
+        >
+        <g-link class="nav__link" to="/editions/muensterland"
+          >DevTreff:Münsterland</g-link
+        >
       </div>
     </footer>
+    <modal
+      name="imprint"
+      width="100%"
+      height="100%"
+      classes="md:max-w-4xl bg-white mx-auto md:h-96 my-auto"
+    >
+      <div class="text-gray-900 p-5">
+        <h3 class="text-3xl font-bold">Impressum</h3>
+        <p class="mt-5">
+          <strong>best it E-Commerce GmbH</strong><br />
+          Linzer Straße 12<br />
+          3300 Amstetten
+        </p>
+        <p class="mt-5">
+          Telefon: +43 7472 909 00<br />
+          E-Mail:
+          <a href="mailto:info@bestit-online.at">info@bestit-online.at</a>
+        </p>
+        <a class="block mt-8 underline" href="#" @click="closeImprintModal"
+          >Schließen</a
+        >
+      </div>
+    </modal>
   </div>
 </template>
 
@@ -65,6 +92,14 @@ export default Vue.extend({
     hasGradient: {
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    showImprintModal() {
+      this.$modal.show("imprint");
+    },
+    closeImprintModal() {
+      this.$modal.hide("imprint");
     }
   }
 });

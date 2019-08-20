@@ -5,7 +5,7 @@
       @click="$refs.modal.open()"
     >
       <img
-        class="h-64 md:h-48 lg:h-64"
+        class="mx-auto md:w-full md:object-cover h-64 md:h-48 lg:h-64"
         :src="
           speaker.image
             ? speaker.image
@@ -14,7 +14,7 @@
       />
       <div class="title-container relative">
         <h6 class="mt-4 z-20 relative text-xl">
-          {{ speaker.topic_title }}
+          {{ speakerSlot.topic_title }}
         </h6>
         <div class="background z-10 absolute bg-orange-500" />
       </div>
@@ -38,9 +38,14 @@ export default {
     SpeakerModal
   },
   props: {
-    speaker: {
+    speakerSlot: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    speaker() {
+      return this.speakerSlot.speaker;
     }
   }
 };

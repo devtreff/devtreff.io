@@ -1,6 +1,6 @@
 <template>
   <section
-    v-if="speaker.length > 0"
+    v-if="speakerSlots.length > 0"
     class="relative flex pt-8 pb-8 lg:py-16 items-center justify-end overflow-hidden flex-col bg-gray-200"
   >
     <div class="lg:max-w-4xl w-full px-5 z-10 bg-gray-200">
@@ -8,12 +8,12 @@
         <Title class="lg:text-xl">Die Speaker</Title>
       </div>
     </div>
-    <div class="max-w-4xl md:flex md:justify-center">
+    <div class="w-full max-w-4xl md:flex md:justify-center">
       <SpeakerTile
-        v-for="speakerItem in speaker"
-        :key="speakerItem._uid"
-        class="md:w-1/3"
-        :speaker="speakerItem"
+        v-for="speakerSlot in speakerSlots"
+        :key="speakerSlot.speaker._uid"
+        class="md:w-1/3 w-64 mx-auto"
+        :speaker-slot="speakerSlot"
       />
     </div>
     <div class="mt-10">
@@ -55,7 +55,7 @@ export default {
     SpeakerApplicationButton
   },
   props: {
-    speaker: {
+    speakerSlots: {
       type: Array,
       required: true
     }
