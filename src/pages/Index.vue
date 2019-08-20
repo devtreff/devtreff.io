@@ -68,11 +68,6 @@ query{
               }
             }
           }
-          speaker{
-            name
-            topic_title
-            topic_subtitle
-          }
         }
       }
     }
