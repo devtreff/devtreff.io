@@ -2,25 +2,14 @@
 query BlogPost($path: String!) {
   blogPost(path: $path) {
     name
-    eventLocation {
-        name
-        content {
-            city
-        }
-    }
     content {
       hero_image
       hero_title
       hero_tagline
+      hero_subtitle
       author
       title
       subtitle
-      event {
-        name
-        content {
-          date
-        }
-      }
       highlighted_links{
           _uid
           title
@@ -51,9 +40,9 @@ query BlogPost($path: String!) {
           <h1 class="mt-8 text-5xl font-bold mb-0 leading-none">
             {{ blogPost.content.hero_title }}
           </h1>
-          <small v-if="eventLocation" class="text-xl"
-            >{{ eventLocation.content.city }} - {{ eventLocation.name }}</small
-          >
+          <small v-if="eventLocation" class="text-xl">{{
+            blogPost.content.hero_subtitle
+          }}</small>
         </div>
         <div class="flex justify-between">
           <FormatDate :date-string="eventDate" />
@@ -178,9 +167,6 @@ export default {
       return this.blogPost.content.event
         ? this.blogPost.content.event.content.date
         : null;
-    },
-    eventLocation() {
-      return this.blogPost.eventLocation;
     }
   }
 };

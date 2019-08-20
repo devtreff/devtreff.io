@@ -200,8 +200,6 @@ class StoryblokSource {
   async fetchBlogPosts(store) {
     const client = this.getClient();
 
-    const editionsMap = await this.getEditionsMap();
-
     const blogPostsResponse = await client.get("cdn/stories", {
       version,
       starts_with: "blog-posts",
@@ -209,15 +207,7 @@ class StoryblokSource {
     });
 
     const stories = blogPostsResponse.data.stories.map(story => {
-      let location = null;
-
-      if (story.content.event) {
-        const edition = editionsMap[story.content.event.content.edition];
-        location = edition.content.location;
-      }
-
       return produce(story, draft => {
-        draft.eventLocation = location;
         draft.content.content_components = draft.content.content_components.map(
           contentComponent => JSON.stringify(contentComponent)
         );
