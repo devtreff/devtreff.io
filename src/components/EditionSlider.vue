@@ -47,7 +47,7 @@
               </div>
               <Button
                 tag="a"
-                :href="edition.full_slug"
+                :href="edition.slug"
                 class="mt-10"
                 variant="hollow"
                 >Weitere Informationen</Button

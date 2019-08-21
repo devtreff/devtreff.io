@@ -15,6 +15,7 @@ class StoryblokSource {
 
   constructor(api, options) {
     this.options = options;
+    this.api = api;
     api.loadSource(this.fetchSpeakers.bind(this));
     api.loadSource(this.fetchSections.bind(this));
     api.loadSource(this.fetchEditions.bind(this));
@@ -145,6 +146,18 @@ class StoryblokSource {
       typeName: "Edition",
       stories
     });
+
+    this.api.createPages(({ createPage }) => {
+      stories.forEach(story => {
+        createPage({
+          path: `/${story.slug}`,
+          component: "./src/templates/Edition.vue",
+          context: {
+            path: `/${story.full_slug}`
+          }
+        });
+      });
+    });
   }
 
   async getLocationsMap() {
@@ -226,16 +239,17 @@ class StoryblokSource {
     const contentType = addContentType({ typeName });
 
     stories.forEach(story => {
-      const editionNode = {
+      const node = {
         id: story.uuid,
         fields: {
           ...story,
           path: story.full_slug
         },
-        path: story.full_slug
+        path: story.full_slug,
+        slug: story.slug
       };
 
-      contentType.addNode(editionNode);
+      contentType.addNode(node);
     });
   }
 }

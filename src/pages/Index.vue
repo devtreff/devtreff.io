@@ -18,6 +18,7 @@ query{
       node{
         path
         name
+        slug
         full_slug
         nextEvent {
           name
@@ -58,6 +59,7 @@ query{
           }
           edition{
             name
+            slug
             full_slug
             content {
               location {
@@ -96,7 +98,7 @@ query{
                 :key="event.uuid"
                 tag="a"
                 class="text-left flex-auto max-w-xs"
-                :href="event.content.edition.full_slug"
+                :href="event.content.edition.slug"
               >
                 <div class="font-bold">
                   {{ event.content.edition.content.location.content.city }}

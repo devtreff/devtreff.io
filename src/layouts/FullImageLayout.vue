@@ -27,10 +27,8 @@
       <hr class="bg-gray-500 opacity-75 h-px max-w-4xl" />
       <div class="font-bold flex justify-center text-xs pt-5">
         <a href="#" class="nav__link" @click="showImprintModal">Impressum</a>
-        <g-link class="nav__link" to="/editions/amstetten"
-          >DevTreff:Amstetten</g-link
-        >
-        <g-link class="nav__link" to="/editions/muensterland"
+        <g-link class="nav__link" to="/amstetten">DevTreff:Amstetten</g-link>
+        <g-link class="nav__link" to="/muensterland"
           >DevTreff:Münsterland</g-link
         >
       </div>
