@@ -51,4 +51,52 @@ export default function(Vue, { head, isClient }) {
     href:
       "https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap"
   });
+
+  head.meta.push({
+    key: "language",
+    name: "language",
+    content: `DE`
+  });
+
+  head.meta.push({
+    key: "robots",
+    name: "robots",
+    content: `index,follow`
+  });
+
+  head.meta.push({
+    key: "og:title",
+    name: "og:title",
+    content: `DevTreff Amstetten`
+  });
+
+  head.meta.push({
+    key: "og:site_name",
+    name: "og:site_name",
+    content: `DevTreff Amstetten`
+  });
+
+  head.meta.push({
+    key: "og:url",
+    name: "og:url",
+    content: `https://devtreff.io/`
+  });
+
+  head.meta.push({
+    key: "og:description",
+    name: "og:description",
+    content: `Das DevTreff ist eine Veranstaltung von und für ProgrammiererInnen von Software-Lösungen.`
+  });
+
+  head.meta.push({
+    key: "og:image",
+    name: "og:image",
+    content: `https://a.storyblok.com/f/59562/1024x683/a28cc0fdb4/1_ewald_remise1-1024x683.jpg`
+  });
+
+  head.meta.push({
+    key: "twitter:description",
+    name: "twitter:description",
+    content: `Das DevTreff ist eine Veranstaltung von und für ProgrammiererInnen von Software-Lösungen.`
+  });
 }
