@@ -1,7 +1,5 @@
 # devtreff.io
 
-## THIS PROJECT IS WORK IN PROGRESS. The new website is not live yet.
-
 This is the codebase for [devtreff.io](https://devtreff.io). It uses [Gridsome](https://gridsome.org), which is a Vue.js-based static site generator.
 
 ## Contributing
@@ -31,5 +29,5 @@ git clone git@github.com:devtreff/devtreff.io.git
 
 2. _Install [yarn](https://yarnpkg.com/)_.
 3. _Install the dependencies:_ Run `yarn install` to install the node dependencies.
-4. _Start the local dev server:_ Run `gridsome develop` to start a local dev server at `http://localhost:8080`
+4. _Start the local dev server:_ Run `STORYBLOK_ACCESS_TOKEN=<STORYBLOK_ACCESS_TOKEN> gridsome develop` to start a local dev server at `http://localhost:8080`. To get a `STORYBLOK_ACCESS_TOKEN` for development, contact us at contact@devtreff.io.
 5. Happy coding 🎉🙌
