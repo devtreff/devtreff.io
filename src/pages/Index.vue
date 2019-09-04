@@ -80,7 +80,7 @@ query{
 <template>
   <FullImageLayout :has-gradient="true" image="/images/DevTreff3_35.jpg">
     <template #hero>
-      <div class="flex-1 flex justify-center md:items-center">
+      <div class="flex-1 flex justify-center items-center">
         <div class="max-w-4xl w-full mt-5 lg:mt-0">
           <div class="max-w-2xl">
             <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold pb-3 lg:pb-8">
