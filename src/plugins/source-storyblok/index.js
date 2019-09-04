@@ -91,12 +91,12 @@ class StoryblokSource {
     const eventsResponse = await client.get("cdn/stories", {
       version,
       starts_with: "events",
-      resolve_relations: "location",
-      filter_query: {
-        date: {
-          "gt-date": DateTime.fromObject({ zone: "Europe/Vienna" }).toISODate()
-        }
-      }
+      resolve_relations: "location"
+      // filter_query: {
+      //   date: {
+      //     "gt-date": DateTime.fromObject({ zone: "Europe/Vienna" }).toISODate()
+      //   }
+      // }
     });
 
     const nextEventsEditionMap = eventsResponse.data.stories.reduce(
@@ -189,7 +189,7 @@ class StoryblokSource {
     const eventsResponse = await client.get("cdn/stories", {
       version,
       starts_with: "events",
-      resolve_relations: "edition,blog_post"
+      resolve_relations: "edition,blog_post,location"
     });
 
     const stories = eventsResponse.data.stories.map(story => {

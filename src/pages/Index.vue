@@ -30,12 +30,6 @@ query{
         content {
           name
           hero_image
-          location {
-            name
-            content {
-              city
-            }
-          }
         }
       }
     }
@@ -57,18 +51,16 @@ query{
               }
             }
           }
+          location {
+            name
+            content {
+              city
+            }
+          }
           edition{
             name
             slug
             full_slug
-            content {
-              location {
-                name
-                content {
-                  city
-                }
-              }
-            }
           }
         }
       }
@@ -101,7 +93,7 @@ query{
                 :href="event.content.edition.slug"
               >
                 <div class="font-bold">
-                  {{ event.content.edition.content.location.content.city }}
+                  {{ event.content.location.content.city }}
                 </div>
                 <div class="text-xs">
                   <FormatDate :date-string="event.content.date" />
@@ -160,7 +152,7 @@ query{
                 event.content.blog_post.content.direct_link.url
             "
             :src="event.content.teaser_image"
-            :title="event.content.edition.content.location.content.city"
+            :title="event.content.location.content.city"
             :subtitle="formatDate(event.content.date)"
           />
         </ImageSlider>

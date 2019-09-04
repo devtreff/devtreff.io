@@ -85,7 +85,7 @@ query Edition($path: String!) {
     <template #main>
       <SpeakerSection
         :speaker-slots="
-          edition.nextEvent ? edition.nextEvent.content.speaker_slots : []
+          hasNextEvent ? edition.nextEvent.content.speaker_slots : []
         "
       />
       <section
@@ -130,6 +130,7 @@ import Agenda from "../components/Agenda.vue";
 import Map from "../components/Map.vue";
 import SpeakerSection from "../components/SpeakerSection.vue";
 import LocationSection from "../components/LocationSection.vue";
+import { DateTime } from "luxon";
 
 export default {
   components: {
@@ -149,7 +150,8 @@ export default {
         : null;
     },
     hasNextEvent() {
-      return !!this.edition.nextEvent;
+      const date = DateTime.fromISO(this.edition.nextEvent.content.date);
+      return date >= DateTime.fromObject({ zone: "Europe/Vienna" });
     },
     coordinates() {
       return {
