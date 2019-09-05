@@ -5,7 +5,7 @@
       @click="$refs.modal.open()"
     >
       <img
-        class="mx-auto md:w-full md:object-cover h-64 md:h-48 lg:h-64"
+        class="mx-auto md:w-full object-cover h-64 md:h-48 lg:h-64"
         :src="
           speaker.image
             ? speaker.image
