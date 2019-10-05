@@ -11,7 +11,7 @@ module.exports = function(api) {
   const tailwindConfig = resolveConfig(require("./tailwind.config"));
 
   api.loadSource(store => {
-    store.addMetaData("tailwind", {
+    store.addMetadata("tailwind", {
       theme: { screens: tailwindConfig.theme.screens }
     });
   });
@@ -21,7 +21,7 @@ module.exports = function(api) {
   });
 
   api.loadSource(async store => {
-    store.addMetaData("coverImage", "~/images/DevTreff3_35.jpg");
+    store.addMetadata("coverImage", "~/images/DevTreff3_35.jpg");
   });
 
   const postcssImport = require("postcss-import")();

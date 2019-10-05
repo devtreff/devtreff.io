@@ -40,6 +40,11 @@ query{
         path
         name
         tag_list
+        edition{
+          name
+          slug
+          full_slug
+        }
         content{
           date
           teaser_image
@@ -56,11 +61,6 @@ query{
             content {
               city
             }
-          }
-          edition{
-            name
-            slug
-            full_slug
           }
         }
       }
@@ -90,7 +90,7 @@ query{
                 :key="event.uuid"
                 tag="a"
                 class="text-left flex-auto max-w-xs"
-                :href="event.content.edition.slug"
+                :href="event.edition.slug"
               >
                 <div class="font-bold">
                   {{ event.content.location.content.city }}
@@ -105,7 +105,7 @@ query{
                 <div class="text-xs">
                   {{ pastEvents.length }} DevTreffs in den letzten 2 Jahren
                 </div>
-              </Button> -->
+              </Button>-->
             </div>
           </div>
         </div>

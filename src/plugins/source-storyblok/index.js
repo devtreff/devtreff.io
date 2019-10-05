@@ -3,6 +3,7 @@
 const StoryblokClient = require("storyblok-js-client");
 const produce = require("immer").produce;
 const { DateTime } = require("luxon");
+const { schemaTypes } = require("./schemaTypes");
 
 const version = process.env.GRIDSOME_STORYBLOK_VERSION;
 class StoryblokSource {
@@ -21,6 +22,9 @@ class StoryblokSource {
     api.loadSource(this.fetchEditions.bind(this));
     api.loadSource(this.fetchEvents.bind(this));
     api.loadSource(this.fetchBlogPosts.bind(this));
+    api.loadSource(({ addSchemaTypes }) => {
+      addSchemaTypes(schemaTypes);
+    });
   }
 
   getClient() {
@@ -102,10 +106,16 @@ class StoryblokSource {
     const nextEventsEditionMap = eventsResponse.data.stories.reduce(
       (acc, event) => {
         const editionUUID = event.content.edition;
-        const eventDate = DateTime.fromISO(event.content.date);
+        const eventDate = DateTime.fromFormat(
+          event.content.date,
+          "yyyy-MM-dd HH:mm"
+        );
 
         if (acc[editionUUID]) {
-          const oldEventDate = DateTime.fromISO(acc[editionUUID].content.date);
+          const oldEventDate = DateTime.fromFormat(
+            acc[editionUUID].content.date,
+            "yyyy-MM-dd HH:mm"
+          );
 
           if (oldEventDate > eventDate) {
             return acc;
@@ -113,12 +123,15 @@ class StoryblokSource {
         }
 
         const nextEvent = produce(event, draft => {
-          draft.content.speaker_slots = draft.content.speaker_slots.map(
+          const speakerSlots = draft.content.speaker_slots
+            ? draft.content.speaker_slots
+            : [];
+          draft.content.speaker_slots = speakerSlots.map(
             ({ speaker, ...rest }) => {
               return {
                 ...rest,
                 speaker: store
-                  .getContentType("Speaker")
+                  .getCollection("Speaker")
                   .findNode({ id: speaker }).content
               };
             }
@@ -183,7 +196,6 @@ class StoryblokSource {
 
   async fetchEvents(store) {
     const client = this.getClient();
-
     const locationsMap = await this.getLocationsMap();
 
     const eventsResponse = await client.get("cdn/stories", {
@@ -197,8 +209,9 @@ class StoryblokSource {
       const locationUUID = edition ? edition.content.location : null;
       const location = locationUUID ? locationsMap[locationUUID] : null;
       return produce(story, draft => {
+        draft.edition = edition;
         if (location) {
-          draft.content.edition.content.location = location;
+          draft.edition.content.location = location;
         }
       });
     });
@@ -226,7 +239,6 @@ class StoryblokSource {
         );
       });
     });
-
     this.createStoryblokContentType({
       store,
       typeName: "BlogPost",
@@ -235,18 +247,15 @@ class StoryblokSource {
   }
 
   createStoryblokContentType({ store, typeName, stories }) {
-    const { addContentType } = store;
-    const contentType = addContentType({ typeName });
+    const { addCollection } = store;
+    const contentType = addCollection({ typeName });
 
     stories.forEach(story => {
       const node = {
+        ...story,
+        path: `/${story.full_slug}`,
         id: story.uuid,
-        fields: {
-          ...story,
-          path: story.full_slug
-        },
-        path: story.full_slug,
-        slug: story.slug
+        slug: `/${story.slug}`
       };
 
       contentType.addNode(node);

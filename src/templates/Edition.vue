@@ -71,14 +71,10 @@ query Edition($path: String!) {
             Am
             <FormatDate :date-string="edition.nextEvent.content.date" />
           </div>
-          <h1 class="mt-4 text-2xl md:text-4xl lg:text-5xl font-bold">
-            {{ edition.nextEvent.name }}
-          </h1>
+          <h1 class="mt-4 text-2xl md:text-4xl lg:text-5xl font-bold">{{ edition.nextEvent.name }}</h1>
         </div>
         <div v-else>
-          <h1 class="mt-4 text-2xl md:text-4xl lg:text-5xl font-bold">
-            {{ edition.name }}
-          </h1>
+          <h1 class="mt-4 text-2xl md:text-4xl lg:text-5xl font-bold">{{ edition.name }}</h1>
         </div>
       </div>
     </template>
@@ -150,7 +146,13 @@ export default {
         : null;
     },
     hasNextEvent() {
-      const date = DateTime.fromISO(this.edition.nextEvent.content.date);
+      if (!this.edition.nextEvent) {
+        return false;
+      }
+      const date = DateTime.fromFormat(
+        this.edition.nextEvent.content.date,
+        "yyyy-MM-dd HH:mm"
+      );
       return date >= DateTime.fromObject({ zone: "Europe/Vienna" });
     },
     coordinates() {
