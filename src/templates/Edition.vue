@@ -130,6 +130,7 @@ import Agenda from "../components/Agenda.vue";
 import Map from "../components/Map.vue";
 import SpeakerSection from "../components/SpeakerSection.vue";
 import LocationSection from "../components/LocationSection.vue";
+import { DateTime } from "luxon";
 
 export default {
   components: {
