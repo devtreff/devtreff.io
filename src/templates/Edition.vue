@@ -71,10 +71,14 @@ query Edition($path: String!) {
             Am
             <FormatDate :date-string="edition.nextEvent.content.date" />
           </div>
-          <h1 class="mt-4 text-2xl md:text-4xl lg:text-5xl font-bold">{{ edition.nextEvent.name }}</h1>
+          <h1 class="mt-4 text-2xl md:text-4xl lg:text-5xl font-bold">
+            {{ edition.nextEvent.name }}
+          </h1>
         </div>
         <div v-else>
-          <h1 class="mt-4 text-2xl md:text-4xl lg:text-5xl font-bold">{{ edition.name }}</h1>
+          <h1 class="mt-4 text-2xl md:text-4xl lg:text-5xl font-bold">
+            {{ edition.name }}
+          </h1>
         </div>
       </div>
     </template>
@@ -126,7 +130,6 @@ import Agenda from "../components/Agenda.vue";
 import Map from "../components/Map.vue";
 import SpeakerSection from "../components/SpeakerSection.vue";
 import LocationSection from "../components/LocationSection.vue";
-import { DateTime } from "luxon";
 
 export default {
   components: {
@@ -141,9 +144,7 @@ export default {
       return this.$page.edition;
     },
     location() {
-      return this.edition.nextEvent
-        ? this.edition.nextEvent.content.location
-        : null;
+      return this.hasNextEvent ? this.edition.nextEvent.content.location : null;
     },
     hasNextEvent() {
       if (!this.edition.nextEvent) {

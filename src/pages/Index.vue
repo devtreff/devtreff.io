@@ -212,11 +212,17 @@ export default {
       return this.pastEvents.filter(({ content }) => content.blog_post);
     },
     upcomingEvents() {
-      const upcoming = this.mappedEvents.filter(({ luxonDate }) => {
+      let upcoming = this.mappedEvents.filter(({ luxonDate }) => {
         const now = DateTime.local();
         return luxonDate >= now;
       });
 
+      if (upcoming.length === 0) {
+        upcoming = this.mappedEvents
+          .slice()
+          .sort((a, b) => b.luxonDate - a.luxonDate)
+          .slice(0, 1);
+      }
       return upcoming;
     }
   },
