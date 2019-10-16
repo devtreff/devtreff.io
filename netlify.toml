@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://siegburg.devtreff.io"
+  to = "https://devtreff.io/siegburg"
+  status = 301
+  force = true
