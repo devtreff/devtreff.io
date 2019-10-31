@@ -9,7 +9,7 @@
 
 <static-query>
 query {
-  metaData{
+  metadata{
     tailwind {
       theme {
         screens {

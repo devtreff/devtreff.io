@@ -26,15 +26,9 @@
       </div>
       <hr class="bg-gray-500 opacity-75 h-px max-w-4xl" />
       <div class="font-bold flex flex-wrap justify-center text-xs pt-5">
-        <a href="#" class="nav__link my-2" @click="showImprintModal"
-          >Impressum</a
-        >
-        <g-link class="nav__link my-2" to="/amstetten"
-          >DevTreff:Amstetten</g-link
-        >
-        <g-link class="nav__link my-2" to="/muensterland"
-          >DevTreff:Münsterland</g-link
-        >
+        <a href="#" class="nav__link my-2" @click="showImprintModal">Impressum</a>
+        <g-link class="nav__link my-2" to="/amstetten">DevTreff:Amstetten</g-link>
+        <g-link class="nav__link my-2" to="/muensterland">DevTreff:Münsterland</g-link>
       </div>
     </footer>
     <modal
@@ -46,18 +40,16 @@
       <div class="text-gray-900 p-5">
         <h3 class="text-3xl font-bold">Impressum</h3>
         <p class="mt-5">
-          <strong>best it E-Commerce GmbH</strong><br />
-          Linzer Straße 12<br />
-          3300 Amstetten
+          <strong>best it E-Commerce GmbH</strong>
+          <br />Linzer Straße 12
+          <br />3300 Amstetten
         </p>
         <p class="mt-5">
-          Telefon: +43 7472 909 00<br />
-          E-Mail:
+          Telefon: +43 7472 909 00
+          <br />E-Mail:
           <a href="mailto:info@bestit-online.at">info@bestit-online.at</a>
         </p>
-        <a class="block mt-8 underline" href="#" @click="closeImprintModal"
-          >Schließen</a
-        >
+        <a class="block mt-8 underline" href="#" @click="closeImprintModal">Schließen</a>
       </div>
     </modal>
   </div>
@@ -65,7 +57,7 @@
 
 <static-query>
 query {
-  metaData {
+  metadata {
     siteName
     coverImage
   }

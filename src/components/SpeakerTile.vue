@@ -9,22 +9,16 @@
         :src="
           speaker.image
             ? speaker.image
-            : 'https://devtreff.io/src/img/webp/dummy.webp'
+            : 'https://old.devtreff.io/src/img/webp/dummy.webp'
         "
       />
       <div class="title-container relative">
-        <h6 class="mt-4 z-20 relative text-xl">
-          {{ speakerSlot.topic_title }}
-        </h6>
+        <h6 class="mt-4 z-20 relative text-xl">{{ speakerSlot.topic_title }}</h6>
         <div class="background z-10 absolute bg-orange-500" />
       </div>
       <div class="font-bold mt-3">{{ speaker.name }}</div>
-      <div>
-        {{ speaker.position }}
-      </div>
-      <div>
-        {{ speaker.company }}
-      </div>
+      <div>{{ speaker.position }}</div>
+      <div>{{ speaker.company }}</div>
     </div>
     <SpeakerModal ref="modal" :speaker="speaker" />
   </div>

@@ -13,19 +13,19 @@
                 : '/images/devtreff-font-logo.svg'
             "
           />
-          {{ $static.metaData.siteName }}
+          {{ $static.metadata.siteName }}
         </span>
       </g-link>
     </strong>
     <!-- <nav class="nav">
       <g-link class="nav__link" to="/archive">Archiv</g-link>
-    </nav> -->
+    </nav>-->
   </header>
 </template>
 
 <static-query>
 query {
-  metaData {
+  metadata {
     siteName
   }
 }

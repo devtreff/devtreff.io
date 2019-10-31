@@ -130,6 +130,7 @@ import Agenda from "../components/Agenda.vue";
 import Map from "../components/Map.vue";
 import SpeakerSection from "../components/SpeakerSection.vue";
 import LocationSection from "../components/LocationSection.vue";
+import { DateTime } from "luxon";
 
 export default {
   components: {
@@ -147,7 +148,14 @@ export default {
       return this.hasNextEvent ? this.edition.nextEvent.content.location : null;
     },
     hasNextEvent() {
-      return !!this.edition.nextEvent;
+      if (!this.edition.nextEvent) {
+        return false;
+      }
+      const date = DateTime.fromFormat(
+        this.edition.nextEvent.content.date,
+        "yyyy-MM-dd HH:mm"
+      );
+      return date >= DateTime.fromObject({ zone: "Europe/Vienna" });
     },
     coordinates() {
       return {

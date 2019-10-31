@@ -12,7 +12,7 @@
           :src="
             speaker.image
               ? speaker.image
-              : 'https://devtreff.io/src/img/webp/dummy.webp'
+              : 'https://old.devtreff.io/src/img/webp/dummy.webp'
           "
         />
         <div

@@ -18,7 +18,7 @@
 
 <static-query>
 query {
-  metaData {
+  metadata {
     siteName
     coverImage
   }
