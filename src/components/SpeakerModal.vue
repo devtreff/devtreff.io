@@ -22,7 +22,7 @@
       <div class="absolute right-0 p-2 z-30 cursor-pointer" @click="close">
         <i class="material-icons text-white">close</i>
       </div>
-      <div class="p-10 w-full">
+      <div class="p-10 w-full overflow-auto">
         <small class="uppercase text-orange-500 font-bold tracking-widest"
           >Speaker</small
         >
