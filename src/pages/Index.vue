@@ -119,8 +119,6 @@ query{
 
       <EditionSlider :editions="editions" />
 
-      {{ pastEventsWithBlogPosts }}
-
       <section class="py-16 lg:py-32 relative overflow-hidden">
         <img
           class="absolute z-0"
