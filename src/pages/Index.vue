@@ -132,11 +132,6 @@ query{
           >
         </div>
 
-        <div
-          class="absolute z-10 bg-gray-200 lg:h-64"
-          :style="{ width: '70%', left: '35%', top: '150px' }"
-        />
-
         <ImageSlider class="relative z-10">
           <BlogTeaserImage
             v-for="event in pastEventsWithBlogPosts"
@@ -199,7 +194,9 @@ export default {
       });
     },
     pastEventsWithBlogPosts() {
-      return this.pastEvents.filter(({ content }) => content.blog_post);
+      return this.pastEvents
+        .filter(({ content }) => content.blog_post)
+        .reverse();
     },
     upcomingEvents() {
       let upcoming = this.mappedEvents.filter(({ luxonDate }) => {

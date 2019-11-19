@@ -24,24 +24,6 @@ query {
 <script lang="ts">
 import Vue from "vue";
 
-function handleMouseOverImage(event) {
-  // let left = 0;
-  // const rect = event.target.getBoundingClientRect();
-  // const halfTargetWidth = rect.width / 2;
-  // if (screen.width >= this.mdScreenSize) {
-  //   let delta = halfTargetWidth;
-  //   if (event.clientX > event.target.x + halfTargetWidth) {
-  //     left = this.$el.scrollLeft - delta;
-  //   } else {
-  //     left = this.$el.scrollLeft + delta;
-  //   }
-  //   this.$el.scrollTo({
-  //     left,
-  //     behavior: "smooth"
-  //   });
-  // }
-}
-
 function handleMouseOverContainer() {
   this.$el.scrollTo({
     left: 0,
@@ -56,28 +38,16 @@ export default Vue.extend({
     }
   },
   beforeDestroy() {
-    const images = this.$el.querySelectorAll("img");
-
     this.$el.removeEventListener(
       "mouseleave",
       handleMouseOverContainer.bind(this)
     );
-
-    images.forEach(image => {
-      image.removeEventListener("mouseover", handleMouseOverImage.bind(this));
-    });
   },
   mounted() {
-    const images = this.$el.querySelectorAll("img");
-
     this.$el.addEventListener(
       "mouseleave",
       handleMouseOverContainer.bind(this)
     );
-
-    images.forEach(image => {
-      image.addEventListener("mouseover", handleMouseOverImage.bind(this));
-    });
   }
 });
 </script>
