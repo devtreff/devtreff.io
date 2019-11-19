@@ -199,7 +199,9 @@ export default {
       });
     },
     pastEventsWithBlogPosts() {
-      return this.pastEvents.filter(({ content }) => content.blog_post);
+      return this.pastEvents
+        .filter(({ content }) => content.blog_post)
+        .reverse();
     },
     upcomingEvents() {
       let upcoming = this.mappedEvents.filter(({ luxonDate }) => {
