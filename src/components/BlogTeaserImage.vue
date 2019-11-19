@@ -6,6 +6,7 @@
     <div class="relative teaser-image-container w-full">
       <img
         class="z-1"
+        :alt="`BlogPost für vergangenen DevTreff, ${title} ${subtitle}.`"
         :src="src"
         :style="{ width: '100%', height: 'auto', display: 'block' }"
       />

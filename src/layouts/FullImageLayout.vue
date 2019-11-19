@@ -21,7 +21,10 @@
     <footer class="bg-gray-900 text-white py-12 z-10 relative">
       <div class="w-full flex justify-center">
         <div class="w-48 pb-12">
-          <img src="/images/best-it-logo.png" />
+          <img
+            alt="Das Logo von best it eCommerce solutions"
+            src="/images/best-it-logo.png"
+          />
         </div>
       </div>
       <hr class="bg-gray-500 opacity-75 h-px max-w-4xl" />

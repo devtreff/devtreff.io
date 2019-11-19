@@ -17,7 +17,7 @@
             <div class="flex flex-col items-center">
               <div
                 v-if="edition.nextEvent"
-                class="bg-orange-600 px-2 font-bold text-center py-1"
+                class="bg-gray-900 border-4 border-orange-600 px-2 font-bold text-center py-1"
               >
                 {{ edition.nextEvent.name }} am
                 <FormatDate :date-string="edition.nextEvent.content.date" />

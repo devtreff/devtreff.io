@@ -7,6 +7,7 @@
         >
           <img
             class="logo mr-3 mb-1"
+            alt="Das Logo des DevTreff"
             :src="
               isBlack
                 ? '/images/devtreff-font-logo-black.svg'
