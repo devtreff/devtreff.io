@@ -2,7 +2,12 @@
   <div
     class="flex justify-center min-h-screen min-w-full relative h-full w-full overflow-hidden text-white"
   >
-    <div class="absolute full-bg-img" :style="imageStyle"></div>
+    <div
+      role="img"
+      aria-label="Eine Person stellt bei einem Vortrag eine Frage."
+      class="absolute full-bg-img"
+      :style="imageStyle"
+    ></div>
     <div v-if="hasGradient" class="transparent-gradient" />
     <div v-if="hasVerticalGradient" class="transparent-vertical-gradient" />
     <div class="content absolute h-full w-full">

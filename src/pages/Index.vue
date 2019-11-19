@@ -9,6 +9,7 @@ query{
           image
           _uid
           component
+          image_alt_text
         }
       }
     }
@@ -94,13 +95,6 @@ query{
                   <FormatDate :date-string="event.content.date" />
                 </div>
               </Button>
-
-              <!-- <Button tag="a" href="/archive" class="text-left flex-auto">
-                <div class="font-bold">Archiv</div>
-                <div class="text-xs">
-                  {{ pastEvents.length }} DevTreffs in den letzten 2 Jahren
-                </div>
-              </Button>-->
             </div>
           </div>
         </div>
@@ -113,6 +107,7 @@ query{
         :description="section.content.body"
         :title="section.content.title"
         :image="section.content.image"
+        :image-alt-text="section.content.image_alt_text"
         :is-reversed="index % 2 != 0"
         :show-dots="true"
       />
@@ -122,6 +117,8 @@ query{
       <section class="py-16 lg:py-32 relative overflow-hidden">
         <img
           class="absolute z-0"
+          role="presentation"
+          alt=""
           src="../images/dots_big.svg"
           :style="{ height: '600px', left: '80px', top: '60px' }"
         />

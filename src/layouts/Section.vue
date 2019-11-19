@@ -9,12 +9,16 @@
     <img
       v-if="!isReversed && showDots"
       class="absolute"
+      role="presentation"
+      alt=""
       src="../images/dots_small.svg"
       :style="{ left: '-50px', top: 0 }"
     />
     <img
       v-if="isReversed && showDots"
       class="absolute"
+      role="presentation"
+      alt=""
       src="../images/dots_small.svg"
       :style="{ right: '-50px', top: '-150px' }"
     />
@@ -36,7 +40,7 @@
       </div>
     </div>
     <div v-if="image" class="mt-6 lg:mt-0 z-10">
-      <g-image :src="image" />
+      <g-image :src="image" :alt="imageAltText" />
     </div>
     <div v-else class="image-placeholder flex-1" />
   </section>
@@ -59,6 +63,11 @@ export default {
       required: true
     },
     image: {
+      type: String,
+      required: false,
+      default: null
+    },
+    imageAltText: {
       type: String,
       required: false,
       default: null
