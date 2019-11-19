@@ -68,11 +68,11 @@ query BlogPost($path: String!) {
         <div class="max-w-4xl mx-auto z-10 relative">
           <div class="p-4">
             <h2 class="text-5xl font-bold mb-0 leading-none bg-white">
-              Der Titel des DevTreff
+              {{ blogPost.content.title }}
             </h2>
-            <small class="text-gray-700 bg-white"
-              >Nachbericht vom 27. Februar 2019</small
-            >
+            <small class="text-gray-700 bg-white">
+              {{ blogPost.content.subtitle }}
+            </small>
           </div>
           <div class="flex mt-4 md:mt-14">
             <div class="p-4 bg-white flex-1">
