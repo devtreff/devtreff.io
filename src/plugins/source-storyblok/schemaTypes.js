@@ -6,7 +6,10 @@ type AgendaItem @infer {
     subtitle: String
 }
 
-type BlogPost implements Node @infer
+type BlogPost implements Node @infer {
+    name: String
+    full_slug: String
+}
 
 type LocationContent {
     title: String
@@ -51,11 +54,15 @@ type Edition implements Node @infer {
     nextEvent: NextEvent
 }
 
+type EventBlogPost {
+    full_slug: String
+}
+
 type EventContent {
     date: String
     hero_image: String
     teaser_image: String
-    blog_post: BlogPost
+    blog_post: EventBlogPost
     location: Location
     agenda: [AgendaItem]
     speaker_slots: [SpeakerSlot]

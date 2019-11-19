@@ -258,6 +258,12 @@ class StoryblokSource {
         slug: `/${story.slug}`
       };
 
+      if (typeName === "Event") {
+        console.log("-----");
+        console.log("add node", node);
+        console.log("-----");
+      }
+
       contentType.addNode(node);
     });
   }

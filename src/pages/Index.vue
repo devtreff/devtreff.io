@@ -50,11 +50,6 @@ query{
           teaser_image
           blog_post {
             full_slug
-            content {
-              direct_link {
-                url
-              }
-            }
           }
           location {
             name
@@ -124,6 +119,8 @@ query{
 
       <EditionSlider :editions="editions" />
 
+      {{ pastEventsWithBlogPosts }}
+
       <section class="py-16 lg:py-32 relative overflow-hidden">
         <img
           class="absolute z-0"
@@ -147,10 +144,7 @@ query{
             v-for="event in pastEventsWithBlogPosts"
             :key="event.id"
             target="_blank"
-            :href="
-              event.content.blog_post.content.direct_link &&
-                event.content.blog_post.content.direct_link.url
-            "
+            :href="event.content.blog_post.full_slug"
             :src="event.content.teaser_image"
             :title="event.content.location.content.city"
             :subtitle="formatDate(event.content.date)"
@@ -201,12 +195,10 @@ export default {
       });
     },
     pastEvents() {
-      const upcoming = this.mappedEvents.filter(({ luxonDate }) => {
+      return this.mappedEvents.filter(({ luxonDate }) => {
         const now = DateTime.local();
         return luxonDate < now;
       });
-
-      return upcoming;
     },
     pastEventsWithBlogPosts() {
       return this.pastEvents.filter(({ content }) => content.blog_post);
