@@ -4,11 +4,16 @@
     :style="{ width: '300px' }"
   >
     <div class="relative teaser-image-container w-full">
-      <img
+      <g-image
         class="z-1"
         :alt="`BlogPost für vergangenen DevTreff, ${title} ${subtitle}.`"
         :src="src"
-        :style="{ width: '100%', height: 'auto', display: 'block' }"
+        :style="{
+          width: '100%',
+          height: '200px',
+          objectFit: 'cover',
+          display: 'block'
+        }"
       />
       <div class="absolute overlay top-0 bottom-0">
         <div class="absolute z-10 inset-0 bg-orange-500 opacity-75"></div>
