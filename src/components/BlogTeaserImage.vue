@@ -16,7 +16,7 @@
         }"
       />
       <div class="absolute overlay top-0 bottom-0">
-        <div class="absolute z-10 inset-0 bg-orange-500 opacity-75"></div>
+        <div class="absolute z-10 inset-0 bg-orange-600 opacity-75"></div>
         <div
           class="relative h-full flex flex-col items-center justify-center z-20 title-overlay text-white"
         >

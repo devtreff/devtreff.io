@@ -7,7 +7,7 @@
     <slot />
   </component>
   <component :is="tag" v-else class="tag relative">
-    <div class="background bg-orange-500 absolute" />
+    <div class="background absolute" />
     <div class="container relative">
       <slot />
     </div>
@@ -33,6 +33,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .background {
+  @apply bg-orange-500;
   z-index: 10;
   top: 0;
   bottom: 0;
@@ -47,7 +48,9 @@ export default Vue.extend({
   cursor: pointer;
   &:hover,
   &:focus {
+    @apply text-gray-900;
     .background {
+      @apply bg-orange-300;
       max-width: 100%;
     }
   }
