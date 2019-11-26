@@ -68,6 +68,7 @@ query{
 <template>
   <FullImageLayout
     :has-gradient="true"
+    alt="Eine Person stellt bei einem Vortrag eine Frage."
     image="//img2.storyblok.com/1024x600/f/59562/2048x1369/d54c0aa61b/76765482_474220090114834_8385444739406626816_o_474220086781501.jpg"
   >
     <template #hero>

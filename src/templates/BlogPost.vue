@@ -28,6 +28,7 @@ query BlogPost($path: String!) {
 <template>
   <FullImageLayout
     :image="blogPost.content.hero_image"
+    :alt="blogPost.content.hero_title"
     :has-vertical-gradient="true"
   >
     <template #hero>

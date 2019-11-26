@@ -19,10 +19,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import ContentComponentSelector from "~/content-components/ContentComponentSelector.vue";
 import FormatDate from "~/components/FormatDate.vue";
+import { VLazyImagePlugin } from "v-lazy-image";
 
 export default function(Vue, { head, isClient }) {
   Vue.use(StoryblokVue);
   Vue.use(VueSimpleMarkdown);
+  Vue.use(VLazyImagePlugin);
   Vue.use(VModal);
   Vue.use(VueGoogleMaps, {
     load: {

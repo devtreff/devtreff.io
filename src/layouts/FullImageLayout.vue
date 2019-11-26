@@ -3,7 +3,7 @@
     <FullImage
       :has-gradient="hasGradient"
       :has-vertical-gradient="hasVerticalGradient"
-      alt="DevTreff"
+      :alt="alt"
       :src="image"
     >
       <template #content>
@@ -97,6 +97,10 @@ export default Vue.extend({
     hasGradient: {
       type: Boolean,
       default: false
+    },
+    alt: {
+      type: String,
+      required: true
     }
   },
   methods: {

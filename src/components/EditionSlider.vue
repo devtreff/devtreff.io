@@ -4,7 +4,7 @@
       <FullImage
         v-for="(edition, editionIndex) in editions"
         :key="edition.id"
-        alt="Remise"
+        :alt="edition.content.name"
         :src="
           edition.nextEvent
             ? edition.nextEvent.content.hero_image

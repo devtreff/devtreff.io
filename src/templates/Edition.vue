@@ -62,6 +62,7 @@ query Edition($path: String!) {
         ? edition.nextEvent.content.hero_image
         : edition.content.hero_image
     "
+    :alt="edition.name"
     :has-vertical-gradient="true"
   >
     <template #hero>

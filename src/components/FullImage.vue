@@ -2,12 +2,8 @@
   <div
     class="flex justify-center min-h-screen min-w-full relative h-full w-full overflow-hidden text-white"
   >
-    <div
-      role="img"
-      aria-label="Eine Person stellt bei einem Vortrag eine Frage."
-      class="absolute full-bg-img"
-      :style="imageStyle"
-    ></div>
+    <v-lazy-image :alt="alt" class="absolute full-bg-img" :src="src" />
+
     <div v-if="hasGradient" class="transparent-gradient" />
     <div v-if="hasVerticalGradient" class="transparent-vertical-gradient" />
     <div class="content absolute h-full w-full">
@@ -18,20 +14,22 @@
 
 <script lang="ts">
 import Vue from "vue";
+import VLazyImage from "v-lazy-image";
+
 export default Vue.extend({
+  components: {
+    VLazyImage
+  },
   props: {
     hasGradient: Boolean,
     hasVerticalGradient: Boolean,
     src: {
       type: String,
       required: true
-    }
-  },
-  computed: {
-    imageStyle() {
-      return {
-        backgroundImage: `url(${this.src})`
-      };
+    },
+    alt: {
+      type: String,
+      required: true
     }
   }
 });
@@ -41,9 +39,7 @@ export default Vue.extend({
 .full-bg-img {
   height: 100%;
   width: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  object-fit: cover;
 }
 
 .transparent-gradient {
