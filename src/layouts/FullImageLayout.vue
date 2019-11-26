@@ -38,6 +38,7 @@
         <g-link class="nav__link my-2" to="/muensterland"
           >DevTreff:Münsterland</g-link
         >
+        <g-link class="nav__link my-2" to="/siegburg">DevTreff:Siegburg</g-link>
       </div>
     </footer>
     <modal
