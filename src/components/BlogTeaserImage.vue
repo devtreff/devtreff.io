@@ -1,10 +1,7 @@
 <template>
-  <a
-    class="block overflow-hidden relative cursor-pointer px-2"
-    :style="{ width: '300px' }"
-  >
+  <a class="overflow-hidden relative cursor-pointer px-2 flex-shrink-0" :style="{ width: '300px' }">
     <div class="relative teaser-image-container w-full">
-      <g-image
+      <v-lazy-image
         class="z-1"
         :alt="`BlogPost für vergangenen DevTreff, ${title} ${subtitle}.`"
         :src="src"

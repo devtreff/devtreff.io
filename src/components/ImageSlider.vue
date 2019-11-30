@@ -1,9 +1,9 @@
 <template>
-  <div class="no-scrollbars w-full md:overflow-x-auto pb-8 pt-8">
-    <div class="image-container relative flex w-full lg:ml-64">
-      <div class="md:flex-1" :style="{ maxWidth: '300px' }"></div>
-      <slot />
-    </div>
+  <div class="no-scrollbars overflow-x-auto flex pb-8 pt-8 image-container lg:ml-64">
+    <!-- <div class=""> -->
+    <!-- <div class="md:flex-1" :style="{ maxWidth: '300px' }"></div> -->
+    <slot />
+    <!-- </div> -->
   </div>
 </template>
 
@@ -59,28 +59,28 @@ export default Vue.extend({
   }
 }
 
-.image-container {
-  @media (max-width: theme("screens.md")) {
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    scroll-padding: 0 50%;
-    @apply px-8;
-  }
+// .image-container {
+//   @media (max-width: theme("screens.md")) {
+//     overflow-x: scroll;
+//     scroll-snap-type: x mandatory;
+//     scroll-padding: 0 50%;
+//     @apply px-8;
+//   }
 
-  & > * {
-    scroll-snap-align: center;
-  }
+//   & > * {
+//     scroll-snap-align: center;
+//   }
 
-  img {
-    @media (max-width: theme("screens.md")) {
-      scroll-snap-align: center;
-      width: 100vw;
-    }
+//   img {
+//     @media (max-width: theme("screens.md")) {
+//       scroll-snap-align: center;
+//       width: 100vw;
+//     }
 
-    @media (min-width: theme("screens.md")) {
-      cursor: pointer;
-      transition: transform 200ms ease-in-out;
-    }
-  }
-}
+//     @media (min-width: theme("screens.md")) {
+//       cursor: pointer;
+//       transition: transform 200ms ease-in-out;
+//     }
+//   }
+// }
 </style>

@@ -75,9 +75,7 @@ query{
       <div class="flex-1 flex justify-center items-center">
         <div class="max-w-4xl w-full mt-5 lg:mt-0">
           <div class="max-w-2xl">
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold pb-3 lg:pb-8">
-              Der DevTreff
-            </h1>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold pb-3 lg:pb-8">Der DevTreff</h1>
             <p class="leading-relaxed lg:leading-loose">
               Das DevTreff findet in der Remise Amstetten, am Gelände des
               Quartier A statt. Ein Ort an dem aktuell die Zukunft neu erfunden
@@ -92,9 +90,7 @@ query{
                 class="text-left flex-auto max-w-xs"
                 :href="event.edition.slug"
               >
-                <div class="font-bold">
-                  {{ event.content.location.content.city }}
-                </div>
+                <div class="font-bold">{{ event.content.location.content.city }}</div>
                 <div class="text-xs">
                   <FormatDate :date-string="event.content.date" />
                 </div>
@@ -119,18 +115,16 @@ query{
       <EditionSlider :editions="editions" />
 
       <section class="py-16 lg:py-32 relative overflow-hidden">
-        <img
+        <g-image
           class="absolute z-0"
           role="presentation"
-          alt=""
+          alt
           src="../images/dots_big.svg"
           :style="{ height: '600px', left: '80px', top: '60px' }"
         />
 
         <div class="z-20 max-w-xl mx-auto relative">
-          <Title class="text-lg md:text-xl lg:text-4xl"
-            >Vergangene DevTreffs</Title
-          >
+          <Title class="text-lg md:text-xl lg:text-4xl">Vergangene DevTreffs</Title>
         </div>
 
         <ImageSlider class="relative z-10">
