@@ -1,6 +1,6 @@
 # devtreff.io
 
-This is the codebase for [devtreff.io](https://devtreff.io). It uses [Gridsome](https://gridsome.org), which is a Vue.js-based static site generator.
+This is the codebase for [devtreff.io](https://devtreff.io). It uses [Gridsome](https://gridsome.org), which is a Vue.js-based static site generator and [tailwind CSS](https://tailwindcss.com/) framework.
 
 ## Contributing
 
