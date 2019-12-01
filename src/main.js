@@ -85,6 +85,12 @@ export default function(Vue, { head, isClient }) {
   });
 
   head.meta.push({
+    name: "Description",
+    content:
+      "Das Entwickler-Meetup im Mostviertel. In der Remise im Quartier A in Amstetten."
+  });
+
+  head.meta.push({
     key: "og:title",
     name: "og:title",
     content: `DevTreff Amstetten`
