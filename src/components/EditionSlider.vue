@@ -17,7 +17,7 @@
             <div class="flex flex-col items-center">
               <div
                 v-if="edition.nextEvent"
-                class="bg-gray-900 border-4 border-orange-600 px-2 font-bold text-center py-1"
+                class="bg-dark border-l-8 border-orange-500 px-2 font-bold text-center py-1 text-sm md:text-base"
               >
                 {{ edition.nextEvent.name }} am
                 <FormatDate :date-string="edition.nextEvent.content.date" />
@@ -30,11 +30,8 @@
                   }"
                   class="material-icons text-5xl"
                   @click="scrollToSlide(editionIndex - 1)"
-                  >chevron_left</i
-                >
-                <h1 class="lg:px-16 text-2xl lg:text-5xl font-bold">
-                  {{ edition.content.name }}
-                </h1>
+                >chevron_left</i>
+                <h1 class="lg:px-16 text-2xl lg:text-5xl font-bold">{{ edition.content.name }}</h1>
                 <i
                   :class="{
                     'opacity-25': editionIndex === editions.length - 1,
@@ -42,16 +39,14 @@
                   }"
                   class="material-icons text-5xl"
                   @click="scrollToSlide(editionIndex + 1)"
-                  >chevron_right</i
-                >
+                >chevron_right</i>
               </div>
               <Button
                 tag="a"
                 :href="edition.slug"
                 class="mt-10"
                 variant="hollow"
-                >Weitere Informationen</Button
-              >
+              >Weitere Informationen</Button>
             </div>
           </div>
         </template>

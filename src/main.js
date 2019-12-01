@@ -54,6 +54,24 @@ export default function(Vue, { head, isClient }) {
       "https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap"
   });
 
+  head.link.push({
+    rel: "preload",
+    href: "assets/fonts/MaterialIcons-Regular.0509ab09.woff2",
+    as: "font",
+    type: "font/woff2",
+    crossorigin: true
+  });
+
+  head.link.push({
+    rel: "preconnect",
+    href: "https://fonts.gstatic.com"
+  });
+
+  head.link.push({
+    rel: "preconnect",
+    href: "https://img2.storyblok.com"
+  });
+
   head.meta.push({
     key: "language",
     name: "language",
