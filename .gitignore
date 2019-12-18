@@ -64,3 +64,4 @@ dist
 .cache
 .history
 src/.temp
+.idea
