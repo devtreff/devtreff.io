@@ -75,13 +75,15 @@ query{
       <div class="flex-1 flex justify-center items-center">
         <div class="max-w-4xl w-full mt-5 lg:mt-0">
           <div class="max-w-2xl">
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold pb-3 lg:pb-8">Der DevTreff</h1>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold pb-3 lg:pb-8">DevTreff.io</h1>
+            <div class="card o2 p-5">
             <p class="leading-relaxed lg:leading-loose">
-              Das DevTreff findet in der Remise Amstetten, am Gelände des
-              Quartier A statt. Ein Ort an dem aktuell die Zukunft neu erfunden
-              wird und deshalb ideal zu unseren innovativen Vorträgen rund um
-              Technologien und Digitalisierung passt.
+              Unter devTreff.io finden derzeit an 3 Standorten regelmäßige Treffen von interessierten Entwicklern statt.
+              DevTreff.io ist ein "OpenSource" Projekt. Nicht nur diese Webseite, sondern auch die Events leben von einer
+              aktiven Community. Es werden jederzeit, an allen Standorten SPEAKER gesucht, die ihr Wissen mit einer
+              gleichgesinnten Gruppe teilen möchten.
             </p>
+            </div>
             <div class="mt-6 lg:mt-8 flex justify-between lg:flex-row flex-col">
               <Button
                 v-for="event in upcomingEvents"
@@ -96,6 +98,7 @@ query{
                 </div>
               </Button>
             </div>
+
           </div>
         </div>
       </div>
@@ -124,7 +127,7 @@ query{
         />
 
         <div class="z-20 max-w-xl mx-auto relative">
-          <Title class="text-lg md:text-xl lg:text-4xl">Vergangene DevTreffs</Title>
+          <Title class="text-lg md:text-xl lg:text-4xl">DevTreff Archiv</Title>
         </div>
 
         <ImageSlider class="relative z-10">

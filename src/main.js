@@ -55,11 +55,9 @@ export default function(Vue, { head, isClient }) {
   });
 
   head.link.push({
-    rel: "preload",
-    href: "assets/fonts/MaterialIcons-Regular.0509ab09.woff2",
-    as: "font",
-    type: "font/woff2",
-    crossorigin: true
+    rel: "stylesheet",
+    href:
+            "https://fonts.googleapis.com/icon?family=Material+Icons"
   });
 
   head.link.push({
@@ -87,19 +85,19 @@ export default function(Vue, { head, isClient }) {
   head.meta.push({
     name: "Description",
     content:
-      "Das Entwickler-Meetup im Mostviertel. In der Remise im Quartier A in Amstetten."
+      "Developer MeetUp in Amstetten(AT), Siegburg und in Bocholt (West-Münsterland)."
   });
 
   head.meta.push({
     key: "og:title",
     name: "og:title",
-    content: `DevTreff Amstetten`
+    content: `DevTreff.io`
   });
 
   head.meta.push({
     key: "og:site_name",
     name: "og:site_name",
-    content: `DevTreff Amstetten`
+    content: `DevTreff.io`
   });
 
   head.meta.push({
