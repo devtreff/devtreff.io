@@ -85,7 +85,7 @@ export default function(Vue, { head, isClient }) {
   head.meta.push({
     name: "Description",
     content:
-      "Developer MeetUp in Amstetten(AT), Siegburg und in Bocholt (West-Münsterland)."
+      "Developer MeetUp in Amstetten(AT) und in Bocholt (West-Münsterland)."
   });
 
   head.meta.push({

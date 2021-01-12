@@ -41,7 +41,6 @@
                 >DevTreff:Münsterland
                 </g-link
                 >
-                <g-link class="nav__link my-2" to="/siegburg">DevTreff:Siegburg</g-link>
             </div>
             <div class="flex flex-wrap justify-center mt-4">
                 <a href="https://github.com/devtreff/devtreff.io" target="_blank">
